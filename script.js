@@ -19,6 +19,9 @@ function showJournalPrompt() {
   const randomIndex = Math.floor(Math.random() * prompts.length);
   box.textContent = prompts[randomIndex];
   box.style.display = 'block';
+  box.classList.remove("fade-in");
+  void box.offsetWidth;
+  box.classList.add("fade-in");
 }
 
 // ===== Reflection Box Feature =====
@@ -86,6 +89,7 @@ function showRandomQuote() {
   box.classList.remove("fade-in");
   void box.offsetWidth; // trigger reflow for restart
   box.classList.add("fade-in");
+  box.classList.add("quote-box");
 }
 
 // ===== Submit Community Quote =====
