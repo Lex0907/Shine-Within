@@ -196,3 +196,32 @@ body.dark-mode .community-list li {
   color: #555;
   margin-bottom: 2rem;
 }
+#random-quote.quote-box {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #aad6ff;
+  border-radius: 12px;
+  font-family: 'Georgia', cursive, serif;
+  font-size: 1.25rem;
+  text-align: center;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.5s ease;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
