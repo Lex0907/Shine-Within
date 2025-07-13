@@ -8,7 +8,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   
-  <style>
+ <style>
     /* style.css */
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -44,6 +44,12 @@
       font-size: 2rem;
       color: #333;
       text-shadow: 0 0 5px #fff;
+    }
+    
+    /* --- NEW RULE --- Fixes header text color in dark mode */
+    body.dark-mode header h1 {
+      color: #f1f1f1;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.5); /* Optional: changes shadow for better visibility */
     }
 
     nav ul {
@@ -315,14 +321,13 @@
       margin-top: 2rem;
       width: 100%;
     }
-
-    /* --- MODIFIED --- */
+    
     .qotw-board {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 12px;
-      padding: 0.75rem 1rem; /* Further reduced padding */
+      padding: 0.75rem 1rem;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      border: 1px solid #a1c4fd; /* Reverted to a simple border */
+      border: 1px solid #a1c4fd;
     }
 
     body.dark-mode .qotw-board {
@@ -344,9 +349,9 @@
     .qotw-board #qotw-text {
       font-style: italic;
       font-size: 0.9rem; 
-      min-height: 30px; /* Reduced min-height */
+      min-height: 30px;
       text-align: center;
-      margin-bottom: 0.5rem; /* Added margin for spacing */
+      margin-bottom: 0.5rem;
     }
 
     .qotw-board .qotw-likes {
@@ -365,6 +370,20 @@
 
     .qotw-likes .like-btn {
         font-size: 1rem;
+    }
+    
+    /* --- NEW RULE --- Media query for small screens */
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.5rem; /* Make title smaller */
+      }
+      nav ul {
+        gap: 0.5rem; /* Reduce gap between nav items */
+      }
+      .theme-switch {
+        top: 0.5rem; /* Adjust position slightly */
+        right: 0.5rem;
+      }
     }
 </style>
 </head>
