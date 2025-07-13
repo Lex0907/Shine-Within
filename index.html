@@ -111,7 +111,7 @@
         transform: none;
     }
 
-    input {
+    input[type="text"] {
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -316,33 +316,25 @@
       width: 100%;
     }
 
+    /* --- MODIFIED --- */
     .qotw-board {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 12px;
-      padding: 1rem; /* Reduced padding */
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      /* Replaced solid border with background image */
-      border: 8px solid transparent;
-      background-image: url('https://www.transparenttextures.com/patterns/light-honeycomb.png'), url('https://i.imgur.com/mC70nRy.png'); /* Subtle pattern, then a vine */
-      background-repeat: repeat, repeat;
-      background-origin: padding-box, border-box;
-      background-clip: padding-box, border-box;
+      padding: 0.75rem 1rem; /* Further reduced padding */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      border: 1px solid #a1c4fd; /* Reverted to a simple border */
     }
 
     body.dark-mode .qotw-board {
         background: #2e2e2e;
-        border-color: transparent;
-        background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre-light.png'), url('https://i.imgur.com/mC70nRy.png'); /* Dark mode patterns */
-        background-repeat: repeat, repeat;
-        background-origin: padding-box, border-box;
-        background-clip: padding-box, border-box;
+        border-color: #74b9ff;
     }
 
     .qotw-board h3 {
       margin-top: 0;
       text-align: center;
       color: #333;
-      font-size: 1.1rem; /* Slightly smaller heading */
+      font-size: 1.1rem; 
     }
 
     body.dark-mode .qotw-board h3 {
@@ -351,9 +343,10 @@
 
     .qotw-board #qotw-text {
       font-style: italic;
-      font-size: 0.9rem; /* Slightly smaller text */
-      min-height: 40px; /* Adjust min-height */
+      font-size: 0.9rem; 
+      min-height: 30px; /* Reduced min-height */
       text-align: center;
+      margin-bottom: 0.5rem; /* Added margin for spacing */
     }
 
     .qotw-board .qotw-likes {
@@ -361,9 +354,9 @@
       justify-content: flex-end;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 0.75rem; /* Adjust margin */
+      margin-top: 0.5rem;
       border-top: 1px solid #e0e0e0;
-      padding-top: 0.75rem; /* Adjust padding */
+      padding-top: 0.5rem; 
     }
 
     body.dark-mode .qotw-board .qotw-likes {
@@ -371,9 +364,9 @@
     }
 
     .qotw-likes .like-btn {
-        font-size: 1rem; /* Slightly smaller like button */
+        font-size: 1rem;
     }
-  </style>
+</style>
 </head>
 <body>
   <header>
