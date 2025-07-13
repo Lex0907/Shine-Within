@@ -99,19 +99,19 @@
       background: linear-gradient(to right, #74b9ff, #81ecec);
       transform: translateY(-2px);
     }
-    
+
     button.active {
       box-shadow: 0 0 15px #81ecec;
       transform: scale(1.05);
     }
-    
+
     button:disabled {
         background: #ccc;
         cursor: not-allowed;
         transform: none;
     }
 
-    input[type="text"] {
+    input {
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -138,30 +138,30 @@
       flex-wrap: wrap;
       gap: 1rem;
     }
-    
+
     body.dark-mode .community-list li {
       background-color: #1f1f1f;
       color: #f1f1f1;
     }
-    
+
     .quote-actions {
         display: flex;
         align-items: center;
         flex-shrink: 0;
     }
-    
+
     .quote-actions button {
         margin-left: 0.5rem;
         padding: 5px 10px;
         font-size: 0.8rem;
     }
-    
+
     .quote-text {
         flex-grow: 1;
         margin-right: 1rem;
         word-break: break-word;
     }
-    
+
     .like-container {
       display: flex;
       align-items: center;
@@ -203,7 +203,7 @@
       margin-bottom: 1rem;
       cursor: pointer;
     }
-    
+
     body.dark-mode .quote-card {
       background-color: #1f1f1f;
       color: #f1f1f1;
@@ -216,12 +216,12 @@
       font-size: 0.9rem;
       box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     }
-    
+
     body.dark-mode footer {
       background: #2e2e2e;
       color: #f1f1f1;
     }
-    
+
     .theme-switch {
       position: absolute;
       top: 1rem;
@@ -266,7 +266,7 @@
     #candle-section {
       text-align: center;
     }
-    
+
     .modal-overlay {
         position: fixed;
         top: 0;
@@ -310,29 +310,39 @@
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
+
     #qotw-container {
-      margin-top: 2rem; 
-      width: 100%;      
+      margin-top: 2rem;
+      width: 100%;
     }
 
     .qotw-board {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 12px;
-      padding: 1.5rem;
+      padding: 1rem; /* Reduced padding */
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      border: 1px solid #a1c4fd;
+      /* Replaced solid border with background image */
+      border: 8px solid transparent;
+      background-image: url('https://www.transparenttextures.com/patterns/light-honeycomb.png'), url('https://i.imgur.com/mC70nRy.png'); /* Subtle pattern, then a vine */
+      background-repeat: repeat, repeat;
+      background-origin: padding-box, border-box;
+      background-clip: padding-box, border-box;
     }
 
     body.dark-mode .qotw-board {
         background: #2e2e2e;
-        border-color: #74b9ff;
+        border-color: transparent;
+        background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre-light.png'), url('https://i.imgur.com/mC70nRy.png'); /* Dark mode patterns */
+        background-repeat: repeat, repeat;
+        background-origin: padding-box, border-box;
+        background-clip: padding-box, border-box;
     }
 
     .qotw-board h3 {
       margin-top: 0;
       text-align: center;
       color: #333;
+      font-size: 1.1rem; /* Slightly smaller heading */
     }
 
     body.dark-mode .qotw-board h3 {
@@ -341,9 +351,9 @@
 
     .qotw-board #qotw-text {
       font-style: italic;
-      font-size: 0.95rem;
-      min-height: 50px;
-      text-align: center; 
+      font-size: 0.9rem; /* Slightly smaller text */
+      min-height: 40px; /* Adjust min-height */
+      text-align: center;
     }
 
     .qotw-board .qotw-likes {
@@ -351,9 +361,9 @@
       justify-content: flex-end;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 1rem;
+      margin-top: 0.75rem; /* Adjust margin */
       border-top: 1px solid #e0e0e0;
-      padding-top: 1rem;
+      padding-top: 0.75rem; /* Adjust padding */
     }
 
     body.dark-mode .qotw-board .qotw-likes {
@@ -361,7 +371,7 @@
     }
 
     .qotw-likes .like-btn {
-        font-size: 1.2rem;
+        font-size: 1rem; /* Slightly smaller like button */
     }
   </style>
 </head>
