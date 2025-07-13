@@ -311,12 +311,10 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
+    /* --- MODIFIED --- */
     #qotw-container {
-      position: fixed;
-      top: 150px;
-      right: 20px;
-      width: 250px;
-      z-index: 999;
+      margin-top: 2rem; /* Adds space below the daily quote */
+      width: 100%;      /* Allows it to fit within the section */
     }
 
     .qotw-board {
@@ -346,6 +344,7 @@
       font-style: italic;
       font-size: 0.95rem;
       min-height: 50px;
+      text-align: center; /* Centered text to match other cards */
     }
 
     .qotw-board .qotw-likes {
@@ -365,15 +364,9 @@
     .qotw-likes .like-btn {
         font-size: 1.2rem;
     }
+    
+    /* --- REMOVED MEDIA QUERY for #qotw-container as it's no longer needed --- */
 
-    @media (max-width: 1200px) {
-      #qotw-container {
-        position: static;
-        width: auto;
-        margin: 2rem;
-        order: -1;
-      }
-    }
   </style>
 </head>
 <body>
@@ -399,20 +392,21 @@
     </nav>
   </header>
 
-  <div id="qotw-container">
-    <div class="qotw-board">
-      <h3>🏆 Quote of the Week</h3>
-      <p id="qotw-text">Like some quotes to vote for next week's winner!</p>
-      <div class="qotw-likes">
-        <span class="like-btn">❤️</span>
-        <span id="qotw-count">0</span>
-      </div>
-    </div>
-  </div>
-
   <section id="home">
     <h2>Welcome to Your Dose of Light</h2>
     <div id="daily-quote" class="quote-card">Quote of the Day loading...</div>
+    
+    <div id="qotw-container">
+      <div class="qotw-board">
+        <h3>🏆 Quote of the Week</h3>
+        <p id="qotw-text">Like some quotes to vote for next week's winner!</p>
+        <div class="qotw-likes">
+          <span class="like-btn">❤️</span>
+          <span id="qotw-count">0</span>
+        </div>
+      </div>
+    </div>
+    
     <p>Here you’ll find handpicked quotes and messages to uplift, inspire, and remind you of your strength.</p>
     <button id="show-random-quote-btn">Get a Random Quote</button>
     <div id="random-quote-display" class="quote-card" style="display: none; margin-top: 1rem;"></div>
@@ -523,14 +517,14 @@
         // --- Firebase Configuration ---
         // IMPORTANT: Replace with your own Firebase project configuration!
         const firebaseConfig = {
-  apiKey: "AIzaSyC0ka3EiqyN8J_wEXV8b1_1KAZ67CTmBdY",
-  authDomain: "shinewithinlive.firebaseapp.com",
-  databaseURL: "https://shinewithinlive-default-rtdb.firebaseio.com",
-  projectId: "shinewithinlive",
-  storageBucket: "shinewithinlive.firebasestorage.app",
-  messagingSenderId: "626223295677",
-  appId: "1:626223295677:web:74c56d8938c6d2054e5bd4"
-};
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
 
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
@@ -548,7 +542,7 @@
         };
 
         const quotes = [
-            { text: "You are not behind — you are becoming.", category: "Growth" }, { text: "Just because it's hard doesn't mean you're weak. It means you're trying.", category: "Encouragement" }, { text: "Healing isn't pretty, but you're still doing it.", category: "Healing" }, { text: "You’ve already survived 100% of your worst days.", category: "Strength" }, { text: "The cracks are where the light gets in.", category: "Healing" }, { text: "You’re allowed to be both a masterpiece and a work in progress.", category: "Growth" }, { text: "You’re stronger than the storm you’re walking through.", category: "Strength" }, { text: "Small steps are still steps. Keep going.", category: "Encouragement" }, { text: "The human spirit is stronger than anything that can happen to it.", category: "Strength" }, { text: "A hero is an ordinary individual who finds the strength to persevere and endure in spite of overwhelming obstacles.", category: "Strength" }, { text: "Where there is no struggle, there is no strength.", category: "Strength" }, { text: "Strength does not come from winning. Your struggles develop your strengths.", category: "Strength" }, { text: "The wound is the place where the Light enters you.", category: "Healing" }, { text: "Give yourself the same care and attention that you give to others and watch yourself bloom.", category: "Healing" }, { text: "Healing comes in waves, and maybe today the wave hits the shore. And maybe tomorrow it will pull back. And that's okay.", category: "Healing" }, { text: "Your heart knows the way. Run in that direction.", category: "Healing" }, { text: "Be gentle with yourself, you're doing the best you can.", category: "Healing" }, { text: "The only time you are actually growing is when you are uncomfortable.", category: "Growth" }, { text: "Every moment is a fresh beginning.", category: "Growth" }, { text: "The journey of a thousand miles begins with a single step.", category: "Growth" }, { text: "It's not about being the best. It's about being better than you were yesterday.", category: "Growth" }, { text: "Mistakes are proof that you are trying.", category: "Growth" }, { text: "Just for the record darling, not all positive change feels positive in the beginning.", category: "Encouragement" }, { text: "Even the darkest night will end and the sun will rise.", category: "Encouragement" }, { text: "This too shall pass. It might pass like a kidney stone, but it will pass.", category: "Encouragement" }, { text: "It's okay to not be okay. It's not okay to give up.", category: "Encouragement" }, { text: "You are doing better than you think you are.", category: "Encouragement" }, { text: "Breathe. You're going to be okay. You've gotten through all of your bad days so far.", category: "Encouragement" },
+             { text: "You are not behind — you are becoming.", category: "Growth" }, { text: "Just because it's hard doesn't mean you're weak. It means you're trying.", category: "Encouragement" }, { text: "Healing isn't pretty, but you're still doing it.", category: "Healing" }, { text: "You’ve already survived 100% of your worst days.", category: "Strength" }, { text: "The cracks are where the light gets in.", category: "Healing" }, { text: "You’re allowed to be both a masterpiece and a work in progress.", category: "Growth" }, { text: "You’re stronger than the storm you’re walking through.", category: "Strength" }, { text: "Small steps are still steps. Keep going.", category: "Encouragement" }, { text: "The human spirit is stronger than anything that can happen to it.", category: "Strength" }, { text: "A hero is an ordinary individual who finds the strength to persevere and endure in spite of overwhelming obstacles.", category: "Strength" }, { text: "Where there is no struggle, there is no strength.", category: "Strength" }, { text: "Strength does not come from winning. Your struggles develop your strengths.", category: "Strength" }, { text: "The wound is the place where the Light enters you.", category: "Healing" }, { text: "Give yourself the same care and attention that you give to others and watch yourself bloom.", category: "Healing" }, { text: "Healing comes in waves, and maybe today the wave hits the shore. And maybe tomorrow it will pull back. And that's okay.", category: "Healing" }, { text: "Your heart knows the way. Run in that direction.", category: "Healing" }, { text: "Be gentle with yourself, you're doing the best you can.", category: "Healing" }, { text: "The only time you are actually growing is when you are uncomfortable.", category: "Growth" }, { text: "Every moment is a fresh beginning.", category: "Growth" }, { text: "The journey of a thousand miles begins with a single step.", category: "Growth" }, { text: "It's not about being the best. It's about being better than you were yesterday.", category: "Growth" }, { text: "Mistakes are proof that you are trying.", category: "Growth" }, { text: "Just for the record darling, not all positive change feels positive in the beginning.", category: "Encouragement" }, { text: "Even the darkest night will end and the sun will rise.", category: "Encouragement" }, { text: "This too shall pass. It might pass like a kidney stone, but it will pass.", category: "Encouragement" }, { text: "It's okay to not be okay. It's not okay to give up.", category: "Encouragement" }, { text: "You are doing better than you think you are.", category: "Encouragement" }, { text: "Breathe. You're going to be okay. You've gotten through all of your bad days so far.", category: "Encouragement" },
             { text: "The best way out is always through.", category: "Strength" }, { text: "A smooth sea never made a skilled sailor.", category: "Strength" }, { text: "She stood in the storm, and when the wind did not blow her way, she adjusted her sails.", category: "Strength" }, { text: "The same boiling water that softens the potato hardens the egg. It's about what you're made of, not the circumstances.", category: "Strength" }, { text: "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart.", category: "Encouragement" }, { text: "Sometimes when you are in a dark place you think you have been buried, but you have actually been planted.", category: "Growth" }, { text: "Flowers grow back, even after they are stepped on. So will you.", category: "Growth" }, { text: "The goal is not to be perfect by the end, the goal is to be better today.", category: "Growth" }, { text: "It's okay to outgrow people, places, and things. Your personal growth is the priority.", category: "Growth" }, { text: "Healing is not linear. There will be forwards and backwards, and that's okay.", category: "Healing" }, { text: "You can't pour from an empty cup. Take care of yourself first.", category: "Healing" }, { text: "What is coming is better than what is gone.", category: "Encouragement" }, { text: "You have been assigned this mountain to show others it can be moved.", category: "Encouragement" }, { text: "Note to self: you gotta do this for you. This is for you. This isn't about anybody. Live for you. Honor you.", category: "Encouragement" }, { text: "One day you will tell your story of how you've overcome what you're going through now, and it will become part of someone else's survival guide.", category: "Healing" }, { text: "You are not a drop in the ocean. You are the entire ocean in a drop.", category: "Growth" }, { text: "Courage does not always roar. Sometimes courage is the quiet voice at the end of the day saying, 'I will try again tomorrow.'", category: "Strength" }, { text: "Do not let the behavior of others destroy your inner peace.", category: "Healing" }, { text: "There is bravery in being soft.", category: "Healing" }, { text: "You are under no obligation to be the same person you were a year, month, or even 15 minutes ago. You have the right to grow. No apologies.", category: "Growth" }, { text: "The sun will rise and we will try again.", category: "Encouragement" }
         ];
         const prompts = [ "What is something you need to let go of today?", "What would you say to your younger self?", "What does healing look like for you right now?", "Write down 3 things you’re proud of yourself for.", "What is something you’ve survived that you never thought you would?", "If you could speak to someone you miss, what would you tell them?", "What does being at peace mean to you?", "How have you grown in the past year — emotionally or spiritually?", "Who are you when no one else is around?", "What’s one kind thing you can do for yourself this week?", "What is a boundary you need to set for your own well-being?", "Describe a place where you feel completely at ease. What makes it so peaceful?", "What's a compliment you've received that you've never forgotten?", "Write a letter of forgiveness to yourself for a past mistake.", "What is your body asking for today? (e.g., rest, movement, nourishment)", "List five things you can see, four things you can feel, three things you can hear, two things you can smell, and one thing you can taste right now.", "What's a fear that is holding you back, and what's one small step you can take to face it?", "What does success look like to you, outside of career or money?", "Describe a time you felt truly understood by someone.", "What's a simple pleasure you can gift yourself today?", "How can you show more compassion to yourself when you're struggling?", "What is a quality you admire in others that you also possess?", "Write down a worry and then write down a more compassionate, reassuring thought to counter it.", "What are you grateful for in this exact moment?", "What is a creative activity that makes you lose track of time?", "What's a difficult emotion you're feeling right now? Allow yourself to sit with it without judgment.", "Who in your life makes you feel energized and supported?", "What is a promise you want to make to yourself for the upcoming week?", "Describe your perfect, restful day from morning to night.", "What is a limiting belief you're ready to challenge?", "What part of your life is currently bringing you the most joy?", "How do you recharge when you feel drained?", "What is something you've accomplished that you haven't given yourself enough credit for?", "Write about a time you felt connected to nature.", "What is a song that lifts your spirits, and why?", "What is a 'win' you've had this week, no matter how small?", "What are you looking forward to?", "If your body could talk, what would it thank you for?", "What is an area of your life where you'd like to ask for help?", "End this entry with a single word that describes how you want to feel tomorrow."];
@@ -623,21 +617,8 @@
             }
         }
         
-        function handleResponsiveBoard() {
-            const qotwContainer = document.getElementById('qotw-container');
-            const communitySection = document.getElementById('community');
-
-            if (window.innerWidth <= 1200) {
-                if (qotwContainer.parentNode !== communitySection) {
-                    communitySection.prepend(qotwContainer);
-                }
-            } else {
-                if (qotwContainer.parentNode !== document.body) {
-                    document.body.appendChild(qotwContainer);
-                }
-            }
-        }
-
+        // --- REMOVED handleResponsiveBoard function ---
+        
         async function editItem(collectionName, docId, currentText) { const { confirmed, value } = await showModal({ title: 'Edit Entry', text: 'Update your entry:', showInput: true, inputValue: currentText, confirmText: 'Save' }); if (confirmed && value && value.trim() !== "") { try { await db.collection(collectionName).doc(docId).update({ text: value.trim() }); } catch (error) { console.error("Error updating document: ", error); alert("Error updating entry."); } } }
         async function deleteItem(collectionName, docId) { const { confirmed } = await showModal({ title: 'Confirm Deletion', text: 'Are you sure?', showInput: false, confirmText: 'Delete' }); if (confirmed) { try { await db.collection(collectionName).doc(docId).delete(); } catch (error) { console.error("Error removing document: ", error); alert("Error deleting entry."); } } }
         const modal = document.getElementById('custom-modal'), modalTitle = document.getElementById('modal-title'), modalText = document.getElementById('modal-text'), modalInput = document.getElementById('modal-input'), modalCancel = document.getElementById('modal-cancel'), modalConfirm = document.getElementById('modal-confirm'); let modalResolve = null;
@@ -671,8 +652,7 @@
 
         displayQuoteOfTheWeek();
         
-        handleResponsiveBoard();
-        window.addEventListener('resize', handleResponsiveBoard);
+        // --- REMOVED event listener for resizing ---
     });
   </script>
 </body>
