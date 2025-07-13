@@ -8,7 +8,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   
- <style>
+  <style>
     /* style.css */
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -28,10 +28,16 @@
 
     header {
       background: linear-gradient(90deg, #a1c4fd, #c2e9fb);
-      padding: 1rem;
-      text-align: center;
+      padding: 0.5rem 1rem; /* Adjusted padding */
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      position: relative;
+    }
+    
+    /* NEW: Flexbox layout for the main header items */
+    .header-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
     }
 
     body.dark-mode header {
@@ -41,15 +47,16 @@
 
     header h1 {
       margin: 0;
-      font-size: 2rem;
+      font-size: 1.8rem; /* Slightly adjusted size */
       color: #333;
       text-shadow: 0 0 5px #fff;
+      text-align: center; /* Center text within its space */
+      flex-grow: 1; /* Allow title to take up available space */
     }
     
-    /* --- NEW RULE --- Fixes header text color in dark mode */
     body.dark-mode header h1 {
       color: #f1f1f1;
-      text-shadow: 0 0 8px rgba(0, 0, 0, 0.5); /* Optional: changes shadow for better visibility */
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
     }
 
     nav ul {
@@ -59,7 +66,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
-      margin-top: 1rem;
+      margin-top: 0.5rem; /* Reduced margin */
     }
 
     nav a {
@@ -67,6 +74,12 @@
       color: #333;
       font-weight: bold;
       position: relative;
+    }
+    
+    /* NEW: Dark mode color and glow for nav links */
+    body.dark-mode nav a {
+      color: #f1f1f1;
+      text-shadow: 0 0 6px rgba(230, 244, 255, 0.6);
     }
 
     nav a::after {
@@ -227,12 +240,11 @@
       background: #2e2e2e;
       color: #f1f1f1;
     }
-
+    
+    /* MODIFIED: Toggle is now a flex item, no absolute position */
     .theme-switch {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
       display: inline-block;
+      flex-shrink: 0; /* Prevents the switch from shrinking */
     }
 
     .theme-switch input { display: none; }
@@ -372,28 +384,18 @@
         font-size: 1rem;
     }
     
-    /* --- NEW RULE --- Media query for small screens */
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 1.5rem; /* Make title smaller */
-      }
-      nav ul {
-        gap: 0.5rem; /* Reduce gap between nav items */
-      }
-      .theme-switch {
-        top: 0.5rem; /* Adjust position slightly */
-        right: 0.5rem;
-      }
-    }
-</style>
+    /* Removed the old media query as flexbox handles it better */
+  </style>
 </head>
 <body>
   <header>
-    <h1>Shine Within</h1>
-    <label class="theme-switch">
-      <input type="checkbox" id="theme-toggle" />
-      <span class="slider"></span>
-    </label>
+    <div class="header-main">
+      <h1>Shine Within</h1>
+      <label class="theme-switch">
+        <input type="checkbox" id="theme-toggle" />
+        <span class="slider"></span>
+      </label>
+    </div>
     <nav>
       <ul>
         <li><a href="#home">Home</a></li>
@@ -565,7 +567,6 @@
         const prompts = [ "What is something you need to let go of today?", "What would you say to your younger self?", "What does healing look like for you right now?", "Write down 3 things you’re proud of yourself for.", "What is something you’ve survived that you never thought you would?", "If you could speak to someone you miss, what would you tell them?", "What does being at peace mean to you?", "How have you grown in the past year — emotionally or spiritually?", "Who are you when no one else is around?", "What’s one kind thing you can do for yourself this week?", "What is a boundary you need to set for your own well-being?", "Describe a place where you feel completely at ease. What makes it so peaceful?", "What's a compliment you've received that you've never forgotten?", "Write a letter of forgiveness to yourself for a past mistake.", "What is your body asking for today? (e.g., rest, movement, nourishment)", "List five things you can see, four things you can feel, three things you can hear, two things you can smell, and one thing you can taste right now.", "What's a fear that is holding you back, and what's one small step you can take to face it?", "What does success look like to you, outside of career or money?", "Describe a time you felt truly understood by someone.", "What's a simple pleasure you can gift yourself today?", "How can you show more compassion to yourself when you're struggling?", "What is a quality you admire in others that you also possess?", "Write down a worry and then write down a more compassionate, reassuring thought to counter it.", "What are you grateful for in this exact moment?", "What is a creative activity that makes you lose track of time?", "What's a difficult emotion you're feeling right now? Allow yourself to sit with it without judgment.", "Who in your life makes you feel energized and supported?", "What is a promise you want to make to yourself for the upcoming week?", "Describe your perfect, restful day from morning to night.", "What is a limiting belief you're ready to challenge?", "What part of your life is currently bringing you the most joy?", "How do you recharge when you feel drained?", "What is something you've accomplished that you haven't given yourself enough credit for?", "Write about a time you felt connected to nature.", "What is a song that lifts your spirits, and why?", "What is a 'win' you've had this week, no matter how small?", "What are you looking forward to?", "If your body could talk, what would it thank you for?", "What is an area of your life where you'd like to ask for help?", "End this entry with a single word that describes how you want to feel tomorrow."];
         const familyQuestions = [ "What is a piece of advice you received from an elder that you want to pass on?", "What family tradition do you cherish the most and why?", "What is a story about your parents or grandparents that your descendants should know?", "What do you want your children/grandchildren to know about what love means to you?", "What was the happiest moment of your life so far, and who was with you?", "Describe a challenge you overcame and what it taught you about resilience.", "What is the most important lesson you've learned about forgiveness?", "If you could give your younger family members one 'secret to life,' what would it be?", "What do you want your legacy to be within your family?", "What smell, sound, or taste immediately reminds you of home and family?", "What's a piece of music that defines a period of your life?", "Describe a time you felt truly proud of a family member.", "What is the best meal you ever had, and who did you share it with?", "What is something you learned from a mistake that you want your family to know?", "If you could travel back to one moment in your family's history, where would you go?", "What does 'home' mean to you, beyond just a physical place?", "Who was your childhood hero and why?", "What is a small, everyday moment that brings you immense joy?", "What is a skill you're proud of that you'd love to teach someone in your family?", "How did you meet your best friend?", "What is a book or movie that changed the way you see the world?", "Describe a time you had to be brave.", "What is your favorite memory of a holiday with your family?", "What do you admire most about your parents?", "What do you hope your grandchildren will say about you one day?", "What is a family story that always makes you laugh?", "What value do you believe is most important to instill in the next generation?", "Describe a place that feels sacred or special to you.", "What's a dream you still hope to achieve?", "What has been the most surprising thing about getting older?", "What's a family recipe you want to make sure gets passed down?", "Describe a time your family came together to support someone.", "What is your favorite photo of your family and what's the story behind it?", "What's a song that reminds you of your childhood?", "What's a piece of advice you'd give your 20-year-old self?", "What is a family inside joke that you can share?", "What's the most beautiful place you've ever visited with family?", "What's a lesson you learned from a pet?", "What's a story about a family heirloom?", "What's something you admire about your sibling(s)?", "What's a time you felt perfectly content?", "What's a family myth or legend?", "What's the best gift you've ever received and why was it so special?", "What's a challenge your family faced and how did you overcome it together?", "What's your earliest memory?", "What's something you want to be remembered for?", "What's a tradition you started or want to start in your own family?", "What's a moment of pure, unexpected kindness you witnessed or received?", "What's a piece of local history from where you grew up that your family should know?", "If you could have dinner with any three relatives (living or passed), who would they be and why?"];
         
-        // --- MODIFIED: Added creatorId to new posts ---
         async function addItem(collectionName, inputElementId) {
             const input = document.getElementById(inputElementId);
             const text = input.value.trim();
@@ -576,7 +577,7 @@
                         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                         likes: [],
                         likeCount: 0,
-                        creatorId: userId // <-- This tags the post with the user's ID
+                        creatorId: userId 
                     });
                     input.value = "";
                 } catch (error) { console.error("Error adding document: ", error); alert("Error saving entry."); }
@@ -643,7 +644,6 @@
         modalCancel.addEventListener('click', () => { modal.style.display = 'none'; if (modalResolve) modalResolve({ confirmed: false }); });
         modalConfirm.addEventListener('click', () => { modal.style.display = 'none'; if (modalResolve) modalResolve({ confirmed: true, value: modalInput.value }); });
 
-        // --- MODIFIED: Checks for creatorId before showing Edit/Delete buttons ---
         function syncAndRenderList(collectionName, listElementId, isCandle = false) { 
             db.collection(collectionName).orderBy("timestamp", "desc").onSnapshot(snapshot => { 
                 const listElement = document.getElementById(listElementId); 
@@ -676,7 +676,6 @@
                     li.appendChild(textSpan); 
                     li.appendChild(likeContainer); 
 
-                    // Only show edit/delete buttons if the creatorId matches the current userId
                     if (item.creatorId && item.creatorId === userId) {
                         const actionsDiv = document.createElement('div'); 
                         actionsDiv.classList.add('quote-actions'); 
