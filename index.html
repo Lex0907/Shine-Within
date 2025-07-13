@@ -8,7 +8,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   
-  <style>
+ <style>
     /* style.css */
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -28,11 +28,10 @@
 
     header {
       background: linear-gradient(90deg, #a1c4fd, #c2e9fb);
-      padding: 0.5rem 1rem; /* Adjusted padding */
+      padding: 0.5rem 1.5rem; /* MODIFIED - Increased horizontal padding */
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     
-    /* NEW: Flexbox layout for the main header items */
     .header-main {
       display: flex;
       justify-content: space-between;
@@ -47,11 +46,11 @@
 
     header h1 {
       margin: 0;
-      font-size: 1.8rem; /* Slightly adjusted size */
+      font-size: 1.8rem;
       color: #333;
       text-shadow: 0 0 5px #fff;
-      text-align: center; /* Center text within its space */
-      flex-grow: 1; /* Allow title to take up available space */
+      text-align: center;
+      flex-grow: 1;
     }
     
     body.dark-mode header h1 {
@@ -66,7 +65,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
-      margin-top: 0.5rem; /* Reduced margin */
+      margin-top: 0.5rem;
     }
 
     nav a {
@@ -76,7 +75,6 @@
       position: relative;
     }
     
-    /* NEW: Dark mode color and glow for nav links */
     body.dark-mode nav a {
       color: #f1f1f1;
       text-shadow: 0 0 6px rgba(230, 244, 255, 0.6);
@@ -241,10 +239,9 @@
       color: #f1f1f1;
     }
     
-    /* MODIFIED: Toggle is now a flex item, no absolute position */
     .theme-switch {
       display: inline-block;
-      flex-shrink: 0; /* Prevents the switch from shrinking */
+      flex-shrink: 0;
     }
 
     .theme-switch input { display: none; }
@@ -383,9 +380,7 @@
     .qotw-likes .like-btn {
         font-size: 1rem;
     }
-    
-    /* Removed the old media query as flexbox handles it better */
-  </style>
+</style>
 </head>
 <body>
   <header>
