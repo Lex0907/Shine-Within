@@ -9,371 +9,119 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   
   <style>
-    /* style.css */
+    /* Global Styles */
+    :root {
+      --primary-grad-1: #a1c4fd;
+      --primary-grad-2: #c2e9fb;
+      --action-grad-1: #81ecec;
+      --action-grad-2: #74b9ff;
+      --text-main: #333;
+      --text-light: #555;
+      --bg-light: #fff;
+      --bg-gradient: linear-gradient(to bottom right, #e0f7fa, #d1c4e9);
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --font-family: 'Segoe UI', sans-serif;
+    }
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: var(--font-family);
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom right, #e0f7fa, #d1c4e9);
-      background-image: url('https://www.transparenttextures.com/patterns/vine.png'); /* vine texture */
-      color: #333;
+      background: var(--bg-gradient);
+      background-image: url('https://www.transparenttextures.com/patterns/vine.png');
+      color: var(--text-main);
       line-height: 1.6;
       transition: background-color 0.3s, color 0.3s;
     }
-
     body.dark-mode {
-      background: #121212;
-      color: #f1f1f1;
+      --text-main: #f1f1f1;
+      --text-light: #ccc;
+      --bg-light: #1f1f1f;
+      --bg-gradient: #121212;
+      --shadow-light: rgba(255, 255, 255, 0.1);
+      --primary-grad-1: #2e2e2e;
+      --primary-grad-2: #3a3a3a;
+      --action-grad-1: #2e2e2e;
+      --action-grad-2: #74b9ff;
     }
-
     header {
-      background: linear-gradient(90deg, #a1c4fd, #c2e9fb);
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      position: relative;
+      background: linear-gradient(90deg, var(--primary-grad-1), var(--primary-grad-2));
+      padding: 1rem; text-align: center; box-shadow: 0 2px 4px var(--shadow-light); position: relative;
     }
-
-    body.dark-mode header {
-      background: #2e2e2e;
-      color: #f1f1f1;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      color: #333;
-      text-shadow: 0 0 5px #fff;
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      position: relative;
-    }
-
-    nav a::after {
-      content: '✨';
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-      0% { opacity: 1; }
-      50% { opacity: 0.2; }
-      100% { opacity: 1; }
-    }
-
-    section {
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-    }
-
+    header h1 { margin: 0; font-size: 2rem; color: var(--text-main); text-shadow: 0 0 5px #fff; }
+    body.dark-mode header h1 { text-shadow: none; }
+    nav ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1rem; }
+    nav a { text-decoration: none; color: var(--text-main); font-weight: bold; position: relative; }
+    nav a::after { content: '✨'; position: absolute; top: -10px; right: -10px; animation: shimmer 2s infinite; }
+    @keyframes shimmer { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
+    section { padding: 2rem; max-width: 800px; margin: auto; }
     button {
-      background: linear-gradient(to right, #81ecec, #74b9ff);
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #fff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+      background: linear-gradient(to right, var(--action-grad-1), var(--action-grad-2));
+      border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; color: #fff;
+      box-shadow: 0 4px 10px var(--shadow-light); transition: all 0.2s ease;
     }
-
-    button:hover {
-      background: linear-gradient(to right, #74b9ff, #81ecec);
-      transform: translateY(-2px);
+    button:hover { background: linear-gradient(to right, var(--action-grad-2), var(--action-grad-1)); transform: translateY(-2px); }
+    button.active, button:focus { box-shadow: 0 0 15px var(--action-grad-1); transform: scale(1.05); outline: none; }
+    button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+    input[type="text"], textarea {
+      padding: 10px; border: 1px solid #ccc; border-radius: 8px; width: 100%; box-sizing: border-box; background-color: var(--bg-light); color: var(--text-main);
     }
-    
-    button.active {
-      box-shadow: 0 0 15px #81ecec;
-      transform: scale(1.05);
-    }
-    
-    button:disabled {
-        background: #ccc;
-        cursor: not-allowed;
-        transform: none;
-    }
-
-    input[type="text"] {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .community-list {
-      list-style: none;
-      padding: 0;
-      margin-top: 1rem;
-    }
-
+    .community-list { list-style: none; padding: 0; margin-top: 1rem; }
     .community-list li {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 1rem 1.5rem;
-      margin: 0.5rem 0;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      font-style: italic;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
+      background: rgba(255, 255, 255, 0.8); padding: 1rem 1.5rem; margin: 0.5rem 0; border-radius: 10px;
+      box-shadow: 0 2px 8px var(--shadow-light); font-style: italic; display: flex; flex-direction: column; gap: 1rem;
     }
-    
-    body.dark-mode .community-list li {
-      background-color: #1f1f1f;
-      color: #f1f1f1;
-    }
-    
-    .quote-actions {
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
-    }
-    
-    .quote-actions button {
-        margin-left: 0.5rem;
-        padding: 5px 10px;
-        font-size: 0.8rem;
-    }
-    
-    .quote-text {
-        flex-grow: 1;
-        margin-right: 1rem;
-        word-break: break-word;
-    }
-    
-    .like-container {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-right: auto;
-    }
-
-    .like-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.5rem;
-      padding: 0;
-      color: #ff7675;
-      transition: transform 0.2s ease;
-    }
-
-    .like-btn:hover {
-      transform: scale(1.2);
-    }
-
-    .like-count {
-      font-weight: bold;
-      font-size: 1rem;
-      color: #555;
-    }
-
-    body.dark-mode .like-count {
-        color: #ccc;
-    }
-
-    .quote-card {
-      background: rgba(230, 244, 255, 0.9);
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      font-style: italic;
-      text-align: center;
-      margin-bottom: 1rem;
-      cursor: pointer;
-    }
-    
-    body.dark-mode .quote-card {
-      background-color: #1f1f1f;
-      color: #f1f1f1;
-    }
-
-    footer {
-      background: linear-gradient(90deg, #a1c4fd, #c2e9fb);
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
-    body.dark-mode footer {
-      background: #2e2e2e;
-      color: #f1f1f1;
-    }
-    
-    .theme-switch {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      display: inline-block;
-    }
-
+    body.dark-mode .community-list li { background-color: var(--bg-light); }
+    .list-item-main { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .quote-actions { display: flex; align-items: center; flex-shrink: 0; }
+    .quote-actions button { margin-left: 0.5rem; padding: 5px 10px; font-size: 0.8rem; }
+    .quote-text { flex-grow: 1; margin-right: 1rem; word-break: break-word; }
+    .like-container { display: flex; align-items: center; gap: 0.5rem; }
+    .item-interactions { display: flex; align-items: center; gap: 1rem; margin-right: auto; }
+    .like-btn, .share-btn, .reply-btn-main { background: none; border: none; cursor: pointer; font-size: 1.5rem; padding: 0; transition: transform 0.2s ease; }
+    .like-btn { color: #ff7675; }
+    .share-btn, .reply-btn-main { color: var(--text-light); }
+    .like-btn:hover, .share-btn:hover, .reply-btn-main:hover { transform: scale(1.2); }
+    .like-count { font-weight: bold; font-size: 1rem; color: var(--text-light); }
+    .quote-card { background: rgba(230, 244, 255, 0.9); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px var(--shadow-light); font-style: italic; text-align: center; margin-bottom: 1rem; cursor: pointer; }
+    body.dark-mode .quote-card { background-color: var(--bg-light); }
+    footer { background: linear-gradient(90deg, var(--primary-grad-1), var(--primary-grad-2)); text-align: center; padding: 1rem; font-size: 0.9rem; box-shadow: 0 -2px 4px var(--shadow-light); }
+    .theme-switch { position: absolute; top: 1rem; right: 1rem; display: inline-block; }
     .theme-switch input { display: none; }
-
-    .slider {
-      width: 50px;
-      height: 24px;
-      background-color: #74b9ff;
-      border-radius: 24px;
-      position: relative;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .slider::before {
-      content: "☀️";
-      position: absolute;
-      font-size: 16px;
-      line-height: 24px;
-      left: 4px;
-      transition: 0.3s;
-    }
-
+    .slider { width: 50px; height: 24px; background-color: #74b9ff; border-radius: 24px; position: relative; cursor: pointer; transition: 0.3s; }
+    .slider::before { content: "☀️"; position: absolute; font-size: 16px; line-height: 24px; left: 4px; transition: 0.3s; }
     input:checked + .slider { background-color: #2e2e2e; }
-
-    input:checked + .slider::before {
-      content: "🌙";
-      transform: translateX(26px);
-    }
-
-    .submission-box {
-      display: flex;
-      gap: 0.5rem;
-      margin: 1rem 0;
-    }
-
-    #candle-section {
-      text-align: center;
-    }
-    
-    .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.5);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-    }
-    .modal-content {
-        background: white;
-        padding: 2rem;
-        border-radius: 10px;
-        width: 90%;
-        max-width: 500px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-    body.dark-mode .modal-content {
-        background: #2e2e2e;
-    }
-    .modal-content h3 {
-        margin-top: 0;
-    }
-    .modal-content input {
-        width: 100%;
-        margin-bottom: 1rem;
-    }
-    .modal-actions {
-        text-align: right;
-    }
-    .modal-actions button {
-        margin-left: 0.5rem;
-    }
-
+    input:checked + .slider::before { content: "🌙"; transform: translateX(26px); }
+    .submission-box { display: flex; gap: 0.5rem; margin: 1rem 0; }
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
+    .modal-content { background: var(--bg-light); padding: 2rem; border-radius: 10px; width: 90%; max-width: 500px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    .modal-content h3 { margin-top: 0; }
+    .modal-content input, .modal-content textarea { width: 100%; margin-bottom: 1rem; }
+    .modal-actions { text-align: right; }
+    .modal-actions button { margin-left: 0.5rem; }
     .fade-in { animation: fadeIn 0.8s ease-in-out; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    #qotw-container {
-      position: fixed;
-      top: 150px;
-      right: 20px;
-      width: 250px;
-      z-index: 999;
-    }
-
-    .qotw-board {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      border: 1px solid #a1c4fd;
-    }
-
-    body.dark-mode .qotw-board {
-        background: #2e2e2e;
-        border-color: #74b9ff;
-    }
-
-    .qotw-board h3 {
-      margin-top: 0;
-      text-align: center;
-      color: #333;
-    }
-
-    body.dark-mode .qotw-board h3 {
-        color: #f1f1f1;
-    }
-
-    .qotw-board #qotw-text {
-      font-style: italic;
-      font-size: 0.95rem;
-      min-height: 50px;
-    }
-
-    .qotw-board .qotw-likes {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      border-top: 1px solid #e0e0e0;
-      padding-top: 1rem;
-    }
-
-    body.dark-mode .qotw-board .qotw-likes {
-        border-top-color: #444;
-    }
-
-    .qotw-likes .like-btn {
-        font-size: 1.2rem;
-    }
-
-    @media (max-width: 1200px) {
-      #qotw-container {
-        position: static;
-        width: auto;
-        margin: 2rem;
-        order: -1;
-      }
-    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    #qotw-container { position: fixed; top: 150px; right: 20px; width: 250px; z-index: 999; }
+    .qotw-board { background: rgba(255, 255, 255, 0.9); border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 15px var(--shadow-light); border: 1px solid var(--primary-grad-1); }
+    body.dark-mode .qotw-board { background: #2e2e2e; border-color: var(--action-grad-2); }
+    .qotw-board h3 { margin-top: 0; text-align: center; }
+    .qotw-board #qotw-text { font-style: italic; font-size: 0.95rem; min-height: 50px; }
+    .qotw-board .qotw-likes { display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 1rem; border-top: 1px solid #e0e0e0; padding-top: 1rem; }
+    body.dark-mode .qotw-board .qotw-likes { border-top-color: #444; }
+    .qotw-likes .like-btn { font-size: 1.2rem; }
+    .list-controls { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
+    .list-controls input { width: auto; flex-grow: 1; }
+    .list-controls .sort-buttons button { font-size: 0.9rem; padding: 8px 15px; }
+    .replies-section { border-top: 1px dashed #ccc; margin-top: 1rem; padding-top: 1rem; display: none; }
+    .replies-list { list-style: none; padding-left: 1rem; }
+    .replies-list li { background: rgba(0,0,0,0.03); padding: 0.75rem; border-radius: 8px; font-size: 0.9rem; font-style: normal; }
+    body.dark-mode .replies-list li { background: rgba(255,255,255,0.05); }
+    .journal-buttons { display: flex; gap: 1rem; margin-top: 1rem; }
+    #journal-entry { min-height: 150px; margin-top: 1rem; }
+    .journal-entry-display { border-bottom: 1px solid #eee; padding: 1rem 0; }
+    body.dark-mode .journal-entry-display { border-bottom-color: #444; }
+    .journal-entry-display small { color: var(--text-light); }
+    .delete-journal-btn { background: #ff7675; font-size: 0.8rem; padding: 5px 10px; float: right; }
+    @media (max-width: 1200px) { #qotw-container { position: static; width: auto; margin: 2rem; order: -1; } }
   </style>
 </head>
 <body>
@@ -404,7 +152,7 @@
       <h3>🏆 Quote of the Week</h3>
       <p id="qotw-text">Like some quotes to vote for next week's winner!</p>
       <div class="qotw-likes">
-        <span class="like-btn">❤️</span>
+        <span class="like-btn" style="cursor:default;">❤️</span>
         <span id="qotw-count">0</span>
       </div>
     </div>
@@ -431,12 +179,16 @@
   </section>
 
   <section id="journal">
-    <h2>Self-Care Journal Prompt</h2>
-    <p>Need a moment to reflect? Click the button below to receive a gentle prompt to guide your thoughts.</p>
-    <button id="show-journal-prompt-btn">Give Me a Prompt</button>
-    <div id="prompt-display" class="quote-card" style="margin-top: 1rem; display: none;"></div>
+    <h2>Self-Care Journal</h2>
+    <p>Need a moment to reflect? Use the prompt below to guide your thoughts in your private journal. Your entries are saved only on your device.</p>
+    <div id="prompt-display" class="quote-card">Click for a new prompt!</div>
+    <textarea id="journal-entry" placeholder="Write your thoughts here..."></textarea>
+    <div class="journal-buttons">
+      <button id="save-journal-btn">Save Entry</button>
+      <button id="view-journal-btn">View My Journal</button>
+    </div>
   </section>
-
+  
   <section id="family-questions">
     <h2>Heart Full Family Questions</h2>
     <p>What stories and wisdom do you want to pass on? Get a question to help you share your heart with future generations.</p>
@@ -448,22 +200,29 @@
     <h2>Positivity Playlist</h2>
     <p>Here’s a collection of songs to lift your spirit, calm your heart, and help you feel connected.</p>
     <ul class="community-list">
-      <li><strong>"Keep Your Head Up"</strong> – Andy Grammer</li>
-      <li><strong>"Scars to Your Beautiful"</strong> – Alessia Cara</li>
-      <li><strong>"Rescue"</strong> – Lauren Daigle</li>
-      <li><strong>"Rainbow"</strong> – Kacey Musgraves</li>
-      <li><strong>"Fight Song"</strong> – Rachel Platten</li>
-      <li><strong>"You Say"</strong> – Lauren Daigle</li>
-      <li><strong>"Rise Up"</strong> – Andra Day</li>
-      <li><strong>"Pocketful of Sunshine"</strong> – Natasha Bedingfield 🌻</li>
-      <li><strong>"Brave"</strong> – Sara Bareilles</li>
-      <li><strong>"Who You Are"</strong> – Jessie J</li>
+      <li style="flex-direction: row;"><strong>"Keep Your Head Up"</strong> – Andy Grammer</li>
+      <li style="flex-direction: row;"><strong>"Scars to Your Beautiful"</strong> – Alessia Cara</li>
+      <li style="flex-direction: row;"><strong>"Rescue"</strong> – Lauren Daigle</li>
+      <li style="flex-direction: row;"><strong>"Rainbow"</strong> – Kacey Musgraves</li>
+      <li style="flex-direction: row;"><strong>"Fight Song"</strong> – Rachel Platten</li>
+      <li style="flex-direction: row;"><strong>"You Say"</strong> – Lauren Daigle</li>
+      <li style="flex-direction: row;"><strong>"Rise Up"</strong> – Andra Day</li>
+      <li style="flex-direction: row;"><strong>"Pocketful of Sunshine"</strong> – Natasha Bedingfield 🌻</li>
+      <li style="flex-direction: row;"><strong>"Brave"</strong> – Sara Bareilles</li>
+      <li style="flex-direction: row;"><strong>"Who You Are"</strong> – Jessie J</li>
     </ul>
   </section>
 
   <section id="reflection">
     <h2>What Brings You Hope?</h2>
     <p>Leave a short, anonymous answer below and share a little light with others who visit.</p>
+    <div class="list-controls" id="reflection-controls">
+      <input type="text" id="reflection-search" placeholder="Search reflections...">
+      <div class="sort-buttons">
+        <button data-sort="timestamp" class="active">Newest</button>
+        <button data-sort="likeCount">Most Liked</button>
+      </div>
+    </div>
     <div class="submission-box">
       <input type="text" id="hope-input" placeholder="Your hopeful thought..." />
       <button id="submit-reflection-btn">Submit Reflection</button>
@@ -473,7 +232,13 @@
 
   <section id="community">
     <h2>Share Your Favorite Quote</h2>
-    <p>Have a favorite quote? Share it with the world:</p>
+    <div class="list-controls" id="community-controls">
+      <input type="text" id="community-search" placeholder="Search community quotes...">
+      <div class="sort-buttons">
+        <button data-sort="timestamp" class="active">Newest</button>
+        <button data-sort="likeCount">Most Liked</button>
+      </div>
+    </div>
     <div class="submission-box">
       <input type="text" id="user-quote-input" placeholder="Enter your quote here" />
       <button id="submit-quote-btn">Submit Quote</button>
@@ -491,7 +256,7 @@
     </div>
     <ul id="candle-wall-list" class="community-list"></ul>
   </section>
-
+  
   <section id="about">
     <h2>About This Site</h2>
     <p>This space was created to spread light in dark times, to remind you that you matter, and to share healing words. Every quote here is chosen with heart.</p>
@@ -510,7 +275,8 @@
       <div class="modal-content">
           <h3 id="modal-title">Edit Entry</h3>
           <p id="modal-text"></p>
-          <input type="text" id="modal-input" />
+          <input type="text" id="modal-input" style="display:none;" />
+          <div id="modal-journal-content" style="display:none; max-height: 400px; overflow-y: auto;"></div>
           <div class="modal-actions">
               <button id="modal-cancel">Cancel</button>
               <button id="modal-confirm">Confirm</button>
@@ -520,159 +286,323 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- Firebase Configuration ---
-        // IMPORTANT: Replace with your own Firebase project configuration!
-        const firebaseConfig = {   
-          apiKey: "AIzaSyC0ka3EiqyN8J_wEXV8b1_1KAZ67CTmBdY",   
-          authDomain: "shinewithinlive.firebaseapp.com",   
-          databaseURL: "https://shinewithinlive-default-rtdb.firebaseio.com",   
-          projectId: "shinewithinlive",   
-          storageBucket: "shinewithinlive.firebasestorage.app",   
-          messagingSenderId: "626223295677",   
-          appId: "1:626223295677:web:74c56d8938c6d2054e5bd4"
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
-
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        let userId = localStorage.getItem('shineWithinUserId') || `user_${Date.now()}${Math.random().toString(36).substr(2, 9)}`;
+        localStorage.setItem('shineWithinUserId', userId);
 
-        let userId = localStorage.getItem('shineWithinUserId');
-        if (!userId) {
-            userId = 'user_' + Date.now() + Math.random().toString(36).substr(2, 9);
-            localStorage.setItem('shineWithinUserId', userId);
+        const COLLECTIONS = { submittedQuotes: 'submittedQuotes', reflections: 'reflections', candles: 'candles' };
+        const allStaticQuotes = [ { text: "You are not behind — you are becoming.", category: "Growth" }, { text: "Just because it's hard doesn't mean you're weak. It means you're trying.", category: "Encouragement" }, { text: "Healing isn't pretty, but you're still doing it.", category: "Healing" }, { text: "You’ve already survived 100% of your worst days.", category: "Strength" }, { text: "The cracks are where the light gets in.", category: "Healing" }, { text: "You’re allowed to be both a masterpiece and a work in progress.", category: "Growth" }, { text: "You’re stronger than the storm you’re walking through.", category: "Strength" }, { text: "Small steps are still steps. Keep going.", category: "Encouragement" }, { text: "The human spirit is stronger than anything that can happen to it.", category: "Strength" }, { text: "The wound is the place where the Light enters you.", category: "Healing" }, { text: "Be gentle with yourself, you're doing the best you can.", category: "Healing" }, { text: "Every moment is a fresh beginning.", category: "Growth" }, { text: "Mistakes are proof that you are trying.", category: "Growth" }, { text: "Even the darkest night will end and the sun will rise.", category: "Encouragement" }, { text: "It's okay to not be okay. It's not okay to give up.", category: "Encouragement" }, { text: "The best way out is always through.", category: "Strength" }, { text: "Sometimes when you are in a dark place you think you have been buried, but you have actually been planted.", category: "Growth" }, { text: "Healing is not linear.", category: "Healing" }, { text: "What is coming is better than what is gone.", category: "Encouragement" }, { text: "There is bravery in being soft.", category: "Healing" } ];
+        const prompts = [ "What is something you need to let go of today?", "What would you say to your younger self?", "What does healing look like for you right now?", "Write down 3 things you’re proud of yourself for.", "What is something you’ve survived that you never thought you would?", "If you could speak to someone you miss, what would you tell them?", "What does being at peace mean to you?", "How have you grown in the past year — emotionally or spiritually?" ];
+
+        const modal = { overlay: document.getElementById('custom-modal'), title: document.getElementById('modal-title'), text: document.getElementById('modal-text'), input: document.getElementById('modal-input'), journalContent: document.getElementById('modal-journal-content'), cancel: document.getElementById('modal-cancel'), confirm: document.getElementById('modal-confirm'), resolve: null };
+        function showModal(config) {
+            modal.title.textContent = config.title;
+            modal.text.textContent = config.text || '';
+            modal.input.style.display = config.showInput ? 'block' : 'none';
+            modal.journalContent.style.display = config.showJournal ? 'block' : 'none';
+            if (config.showInput) modal.input.value = config.inputValue || '';
+            if (config.showJournal) modal.journalContent.innerHTML = config.journalHTML || '';
+            modal.confirm.textContent = config.confirmText || 'Confirm';
+            modal.overlay.style.display = 'flex';
+            return new Promise(resolve => modal.resolve = resolve);
         }
-
-        const COLLECTIONS = {
-            submittedQuotes: 'submittedQuotes',
-            reflections: 'reflections',
-            candles: 'candles'
-        };
-
-        const quotes = [
-            { text: "You are not behind — you are becoming.", category: "Growth" }, { text: "Just because it's hard doesn't mean you're weak. It means you're trying.", category: "Encouragement" }, { text: "Healing isn't pretty, but you're still doing it.", category: "Healing" }, { text: "You’ve already survived 100% of your worst days.", category: "Strength" }, { text: "The cracks are where the light gets in.", category: "Healing" }, { text: "You’re allowed to be both a masterpiece and a work in progress.", category: "Growth" }, { text: "You’re stronger than the storm you’re walking through.", category: "Strength" }, { text: "Small steps are still steps. Keep going.", category: "Encouragement" }, { text: "The human spirit is stronger than anything that can happen to it.", category: "Strength" }, { text: "A hero is an ordinary individual who finds the strength to persevere and endure in spite of overwhelming obstacles.", category: "Strength" }, { text: "Where there is no struggle, there is no strength.", category: "Strength" }, { text: "Strength does not come from winning. Your struggles develop your strengths.", category: "Strength" }, { text: "The wound is the place where the Light enters you.", category: "Healing" }, { text: "Give yourself the same care and attention that you give to others and watch yourself bloom.", category: "Healing" }, { text: "Healing comes in waves, and maybe today the wave hits the shore. And maybe tomorrow it will pull back. And that's okay.", category: "Healing" }, { text: "Your heart knows the way. Run in that direction.", category: "Healing" }, { text: "Be gentle with yourself, you're doing the best you can.", category: "Healing" }, { text: "The only time you are actually growing is when you are uncomfortable.", category: "Growth" }, { text: "Every moment is a fresh beginning.", category: "Growth" }, { text: "The journey of a thousand miles begins with a single step.", category: "Growth" }, { text: "It's not about being the best. It's about being better than you were yesterday.", category: "Growth" }, { text: "Mistakes are proof that you are trying.", category: "Growth" }, { text: "Just for the record darling, not all positive change feels positive in the beginning.", category: "Encouragement" }, { text: "Even the darkest night will end and the sun will rise.", category: "Encouragement" }, { text: "This too shall pass. It might pass like a kidney stone, but it will pass.", category: "Encouragement" }, { text: "It's okay to not be okay. It's not okay to give up.", category: "Encouragement" }, { text: "You are doing better than you think you are.", category: "Encouragement" }, { text: "Breathe. You're going to be okay. You've gotten through all of your bad days so far.", category: "Encouragement" },
-            { text: "The best way out is always through.", category: "Strength" }, { text: "A smooth sea never made a skilled sailor.", category: "Strength" }, { text: "She stood in the storm, and when the wind did not blow her way, she adjusted her sails.", category: "Strength" }, { text: "The same boiling water that softens the potato hardens the egg. It's about what you're made of, not the circumstances.", category: "Strength" }, { text: "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart.", category: "Encouragement" }, { text: "Sometimes when you are in a dark place you think you have been buried, but you have actually been planted.", category: "Growth" }, { text: "Flowers grow back, even after they are stepped on. So will you.", category: "Growth" }, { text: "The goal is not to be perfect by the end, the goal is to be better today.", category: "Growth" }, { text: "It's okay to outgrow people, places, and things. Your personal growth is the priority.", category: "Growth" }, { text: "Healing is not linear. There will be forwards and backwards, and that's okay.", category: "Healing" }, { text: "You can't pour from an empty cup. Take care of yourself first.", category: "Healing" }, { text: "What is coming is better than what is gone.", category: "Encouragement" }, { text: "You have been assigned this mountain to show others it can be moved.", category: "Encouragement" }, { text: "Note to self: you gotta do this for you. This is for you. This isn't about anybody. Live for you. Honor you.", category: "Encouragement" }, { text: "One day you will tell your story of how you've overcome what you're going through now, and it will become part of someone else's survival guide.", category: "Healing" }, { text: "You are not a drop in the ocean. You are the entire ocean in a drop.", category: "Growth" }, { text: "Courage does not always roar. Sometimes courage is the quiet voice at the end of the day saying, 'I will try again tomorrow.'", category: "Strength" }, { text: "Do not let the behavior of others destroy your inner peace.", category: "Healing" }, { text: "There is bravery in being soft.", category: "Healing" }, { text: "You are under no obligation to be the same person you were a year, month, or even 15 minutes ago. You have the right to grow. No apologies.", category: "Growth" }, { text: "The sun will rise and we will try again.", category: "Encouragement" }
-        ];
-        const prompts = [ "What is something you need to let go of today?", "What would you say to your younger self?", "What does healing look like for you right now?", "Write down 3 things you’re proud of yourself for.", "What is something you’ve survived that you never thought you would?", "If you could speak to someone you miss, what would you tell them?", "What does being at peace mean to you?", "How have you grown in the past year — emotionally or spiritually?", "Who are you when no one else is around?", "What’s one kind thing you can do for yourself this week?", "What is a boundary you need to set for your own well-being?", "Describe a place where you feel completely at ease. What makes it so peaceful?", "What's a compliment you've received that you've never forgotten?", "Write a letter of forgiveness to yourself for a past mistake.", "What is your body asking for today? (e.g., rest, movement, nourishment)", "List five things you can see, four things you can feel, three things you can hear, two things you can smell, and one thing you can taste right now.", "What's a fear that is holding you back, and what's one small step you can take to face it?", "What does success look like to you, outside of career or money?", "Describe a time you felt truly understood by someone.", "What's a simple pleasure you can gift yourself today?", "How can you show more compassion to yourself when you're struggling?", "What is a quality you admire in others that you also possess?", "Write down a worry and then write down a more compassionate, reassuring thought to counter it.", "What are you grateful for in this exact moment?", "What is a creative activity that makes you lose track of time?", "What's a difficult emotion you're feeling right now? Allow yourself to sit with it without judgment.", "Who in your life makes you feel energized and supported?", "What is a promise you want to make to yourself for the upcoming week?", "Describe your perfect, restful day from morning to night.", "What is a limiting belief you're ready to challenge?", "What part of your life is currently bringing you the most joy?", "How do you recharge when you feel drained?", "What is something you've accomplished that you haven't given yourself enough credit for?", "Write about a time you felt connected to nature.", "What is a song that lifts your spirits, and why?", "What is a 'win' you've had this week, no matter how small?", "What are you looking forward to?", "If your body could talk, what would it thank you for?", "What is an area of your life where you'd like to ask for help?", "End this entry with a single word that describes how you want to feel tomorrow."];
-        const familyQuestions = [ "What is a piece of advice you received from an elder that you want to pass on?", "What family tradition do you cherish the most and why?", "What is a story about your parents or grandparents that your descendants should know?", "What do you want your children/grandchildren to know about what love means to you?", "What was the happiest moment of your life so far, and who was with you?", "Describe a challenge you overcame and what it taught you about resilience.", "What is the most important lesson you've learned about forgiveness?", "If you could give your younger family members one 'secret to life,' what would it be?", "What do you want your legacy to be within your family?", "What smell, sound, or taste immediately reminds you of home and family?", "What's a piece of music that defines a period of your life?", "Describe a time you felt truly proud of a family member.", "What is the best meal you ever had, and who did you share it with?", "What is something you learned from a mistake that you want your family to know?", "If you could travel back to one moment in your family's history, where would you go?", "What does 'home' mean to you, beyond just a physical place?", "Who was your childhood hero and why?", "What is a small, everyday moment that brings you immense joy?", "What is a skill you're proud of that you'd love to teach someone in your family?", "How did you meet your best friend?", "What is a book or movie that changed the way you see the world?", "Describe a time you had to be brave.", "What is your favorite memory of a holiday with your family?", "What do you admire most about your parents?", "What do you hope your grandchildren will say about you one day?", "What is a family story that always makes you laugh?", "What value do you believe is most important to instill in the next generation?", "Describe a place that feels sacred or special to you.", "What's a dream you still hope to achieve?", "What has been the most surprising thing about getting older?", "What's a family recipe you want to make sure gets passed down?", "Describe a time your family came together to support someone.", "What is your favorite photo of your family and what's the story behind it?", "What's a song that reminds you of your childhood?", "What's a piece of advice you'd give your 20-year-old self?", "What is a family inside joke that you can share?", "What's the most beautiful place you've ever visited with family?", "What's a lesson you learned from a pet?", "What's a story about a family heirloom?", "What's something you admire about your sibling(s)?", "What's a time you felt perfectly content?", "What's a family myth or legend?", "What's the best gift you've ever received and why was it so special?", "What's a challenge your family faced and how did you overcome it together?", "What's your earliest memory?", "What's something you want to be remembered for?", "What's a tradition you started or want to start in your own family?", "What's a moment of pure, unexpected kindness you witnessed or received?", "What's a piece of local history from where you grew up that your family should know?", "If you could have dinner with any three relatives (living or passed), who would they be and why?"];
+        modal.cancel.addEventListener('click', () => { modal.overlay.style.display = 'none'; if (modal.resolve) modal.resolve({ confirmed: false }); });
+        modal.confirm.addEventListener('click', () => { modal.overlay.style.display = 'none'; if (modal.resolve) modal.resolve({ confirmed: true, value: modal.input.value }); });
         
-        async function addItem(collectionName, inputElementId) {
-            const input = document.getElementById(inputElementId);
-            const text = input.value.trim();
-            if (text) {
-                try {
-                    await db.collection(collectionName).add({
-                        text: text,
-                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                        likes: [],
-                        likeCount: 0
-                    });
-                    input.value = "";
-                } catch (error) { console.error("Error adding document: ", error); alert("Error saving entry."); }
+        async function shareContent(text) {
+            try {
+                if (navigator.share) {
+                    await navigator.share({ title: 'A quote from Shine Within', text: `"${text}"` });
+                } else {
+                    await navigator.clipboard.writeText(`"${text}"`);
+                    alert('Quote copied to clipboard!');
+                }
+            } catch (err) {
+                console.error("Could not share:", err);
             }
         }
+        
+        function setupListControls(controlsId, collectionName, listId, isCandle = false) {
+            const controls = document.getElementById(controlsId);
+            if (!controls) return;
+            const searchInput = controls.querySelector('input[type="text"]');
+            const sortButtons = controls.querySelectorAll('.sort-buttons button');
+            let currentSort = 'timestamp';
+            let allDocs = [];
+            let unsubscribe;
 
+            function render(docsToRender) {
+                const listElement = document.getElementById(listId);
+                listElement.innerHTML = "";
+                if (docsToRender.length === 0 && searchInput.value) {
+                    listElement.innerHTML = "<li>No items match your search.</li>";
+                } else if (docsToRender.length === 0) {
+                     listElement.innerHTML = "<li>Nothing here yet. Be the first to share!</li>";
+                } else {
+                    docsToRender.forEach(doc => listElement.appendChild(createListItem(doc, collectionName, isCandle)));
+                }
+            }
+
+            function filterAndRender() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const filtered = searchTerm ? allDocs.filter(doc => doc.data().text.toLowerCase().includes(searchTerm)) : allDocs;
+                render(filtered);
+            }
+
+            sortButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    sortButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    currentSort = button.dataset.sort;
+                    fetchAndRender();
+                });
+            });
+            searchInput.addEventListener('keyup', filterAndRender);
+            
+            function fetchAndRender() {
+                if (unsubscribe) unsubscribe();
+                unsubscribe = db.collection(collectionName).orderBy(currentSort, 'desc').onSnapshot(snapshot => {
+                    allDocs = snapshot.docs;
+                    filterAndRender();
+                });
+            }
+            fetchAndRender();
+        }
+
+        function createListItem(doc, collectionName, isCandle) {
+            const item = doc.data();
+            const li = document.createElement("li");
+            li.setAttribute('data-id', doc.id);
+
+            const mainDiv = document.createElement('div');
+            mainDiv.className = 'list-item-main';
+
+            const textSpan = document.createElement('span');
+            textSpan.textContent = isCandle ? `🕯️ ${item.text}` : `"${item.text}"`;
+            textSpan.className = 'quote-text';
+
+            const interactionsDiv = document.createElement('div');
+            interactionsDiv.className = 'item-interactions';
+            const likeContainer = document.createElement('div');
+            likeContainer.className = 'like-container';
+            const likeBtn = document.createElement('button');
+            likeBtn.className = 'like-btn';
+            likeBtn.innerHTML = item.likes?.includes(userId) ? '❤️' : '♡';
+            const likeCount = document.createElement('span');
+            likeCount.className = 'like-count';
+            likeCount.textContent = item.likeCount ?? 0;
+            likeContainer.appendChild(likeBtn);
+            likeContainer.appendChild(likeCount);
+            interactionsDiv.appendChild(likeContainer);
+
+            const actionsDiv = document.createElement('div');
+            actionsDiv.className = 'quote-actions';
+            const shareBtn = document.createElement('button');
+            shareBtn.className = 'share-btn'; shareBtn.title = "Share"; shareBtn.innerHTML = '📲';
+            const replyBtn = document.createElement('button');
+            replyBtn.className = 'reply-btn-main'; replyBtn.title = "Reply"; replyBtn.innerHTML = '💬';
+            const editBtn = document.createElement('button');
+            editBtn.textContent = 'Edit'; editBtn.className = 'edit-btn';
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Delete'; deleteBtn.className = 'delete-btn';
+            actionsDiv.appendChild(shareBtn);
+            if (!isCandle) actionsDiv.appendChild(replyBtn); // No replies for candles
+            actionsDiv.appendChild(editBtn);
+            actionsDiv.appendChild(deleteBtn);
+            
+            mainDiv.appendChild(textSpan);
+            mainDiv.appendChild(interactionsDiv);
+            mainDiv.appendChild(actionsDiv);
+            li.appendChild(mainDiv);
+
+            const repliesSection = document.createElement('div');
+            repliesSection.className = 'replies-section';
+            li.appendChild(repliesSection);
+            
+            return li;
+        }
+
+        function setupListEventListeners(listId, collectionName) {
+            document.getElementById(listId).addEventListener('click', async e => {
+                const target = e.target;
+                const li = target.closest('li[data-id]');
+                if (!li) return;
+                const docId = li.getAttribute('data-id');
+
+                if (target.matches('.edit-btn')) {
+                    const text = li.querySelector('.quote-text').textContent.replace(/["🕯️]/g, '').trim();
+                    const { confirmed, value } = await showModal({ title: 'Edit Entry', showInput: true, inputValue: text });
+                    if (confirmed && value) await db.collection(collectionName).doc(docId).update({ text: value });
+                } else if (target.matches('.delete-btn')) {
+                    const { confirmed } = await showModal({ title: 'Confirm Deletion' });
+                    if (confirmed) await db.collection(collectionName).doc(docId).delete();
+                } else if (target.matches('.like-btn')) {
+                    handleLike(collectionName, docId);
+                } else if (target.matches('.share-btn')) {
+                    const text = li.querySelector('.quote-text').textContent.replace(/["🕯️]/g, '').trim();
+                    shareContent(text);
+                } else if (target.matches('.reply-btn-main')) {
+                    toggleReplies(li, collectionName, docId);
+                } else if (target.matches('.submit-reply-btn')) {
+                    e.preventDefault();
+                    const replyInput = li.querySelector('.reply-input');
+                    if (replyInput && replyInput.value) {
+                        await addReply(collectionName, docId, replyInput.value);
+                        replyInput.value = '';
+                    }
+                }
+            });
+        }
+        
         async function handleLike(collectionName, docId) {
             const docRef = db.collection(collectionName).doc(docId);
-            try {
-                await db.runTransaction(async (transaction) => {
-                    const doc = await transaction.get(docRef);
-                    if (!doc.exists) { throw "Document does not exist!"; }
-                    
-                    const data = doc.data();
-                    const likes = data.likes || [];
-                    const userIndex = likes.indexOf(userId);
-
-                    if (userIndex === -1) {
-                        likes.push(userId);
-                    } else {
-                        likes.splice(userIndex, 1);
-                    }
-                    transaction.update(docRef, { 
-                        likes: likes,
-                        likeCount: likes.length 
-                    });
-                });
-                displayQuoteOfTheWeek(); 
-            } catch (error) {
-                console.error("Like transaction failed: ", error);
-            }
+            await db.runTransaction(async t => {
+                const doc = await t.get(docRef);
+                const data = doc.data();
+                const likes = data.likes || [];
+                const userIndex = likes.indexOf(userId);
+                userIndex === -1 ? likes.push(userId) : likes.splice(userIndex, 1);
+                t.update(docRef, { likes: likes, likeCount: likes.length });
+            });
+            displayQuoteOfTheWeek(); // Refresh QOTW after a like
         }
-        
-        async function displayQuoteOfTheWeek() {
-            const qotwTextElement = document.getElementById('qotw-text');
-            const qotwCountElement = document.getElementById('qotw-count');
-            const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-            const query = db.collection(COLLECTIONS.submittedQuotes)
-                .where('timestamp', '>=', sevenDaysAgo)
-                .orderBy('likeCount', 'desc')
-                .orderBy('timestamp', 'desc')
-                .limit(1);
 
-            try {
-                const snapshot = await query.get();
-                if (snapshot.empty) {
-                    qotwTextElement.textContent = "No top quote this week. Like some quotes to vote!";
-                    qotwCountElement.textContent = "0";
-                } else {
-                    const topQuote = snapshot.docs[0].data();
-                    qotwTextElement.textContent = `"${topQuote.text}"`;
-                    qotwCountElement.textContent = topQuote.likeCount || 0;
-                }
-            } catch (error) {
-                console.error("Error getting quote of the week:", error);
-                qotwTextElement.textContent = "Could not load top quote.";
+        async function addReply(collectionName, parentId, text) {
+            await db.collection(collectionName).doc(parentId).collection('replies').add({
+                text, userId, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        }
+
+        async function toggleReplies(li, collectionName, docId) {
+            const repliesSection = li.querySelector('.replies-section');
+            if (repliesSection.style.display === 'block') {
+                repliesSection.style.display = 'none';
+                return;
+            }
+            repliesSection.style.display = 'block';
+            repliesSection.innerHTML = '<em>Loading replies...</em>';
+            
+            db.collection(collectionName).doc(docId).collection('replies').orderBy('timestamp').onSnapshot(snapshot => {
+                let html = '<ul class="replies-list">';
+                snapshot.forEach(doc => html += `<li>${doc.data().text}</li>`);
+                html += '</ul><form class="submission-box"><input type="text" class="reply-input" placeholder="Write a reply..."><button type="submit" class="submit-reply-btn">Reply</button></form>';
+                repliesSection.innerHTML = html;
+            });
+        }
+
+        async function displayQuoteOfTheWeek() {
+            const qotwText = document.getElementById('qotw-text'), qotwCount = document.getElementById('qotw-count');
+            const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+            const query = db.collection(COLLECTIONS.submittedQuotes).where('timestamp', '>=', sevenDaysAgo).orderBy('likeCount', 'desc').orderBy('timestamp', 'desc').limit(1);
+            const snapshot = await query.get();
+            if (snapshot.empty) {
+                qotwText.textContent = "No top quote this week. Like some quotes to vote!";
+                qotwCount.textContent = "0";
+            } else {
+                const topQuote = snapshot.docs[0].data();
+                qotwText.textContent = `"${topQuote.text}"`;
+                qotwCount.textContent = topQuote.likeCount || 0;
             }
         }
         
         function handleResponsiveBoard() {
             const qotwContainer = document.getElementById('qotw-container');
             const communitySection = document.getElementById('community');
-
             if (window.innerWidth <= 1200) {
-                if (qotwContainer.parentNode !== communitySection) {
-                    communitySection.prepend(qotwContainer);
-                }
+                if (qotwContainer.parentNode !== communitySection) communitySection.prepend(qotwContainer);
             } else {
-                if (qotwContainer.parentNode !== document.body) {
-                    document.body.appendChild(qotwContainer);
-                }
+                if (qotwContainer.parentNode !== document.body) document.body.appendChild(qotwContainer);
             }
         }
 
-        async function editItem(collectionName, docId, currentText) { const { confirmed, value } = await showModal({ title: 'Edit Entry', text: 'Update your entry:', showInput: true, inputValue: currentText, confirmText: 'Save' }); if (confirmed && value && value.trim() !== "") { try { await db.collection(collectionName).doc(docId).update({ text: value.trim() }); } catch (error) { console.error("Error updating document: ", error); alert("Error updating entry."); } } }
-        async function deleteItem(collectionName, docId) { const { confirmed } = await showModal({ title: 'Confirm Deletion', text: 'Are you sure?', showInput: false, confirmText: 'Delete' }); if (confirmed) { try { await db.collection(collectionName).doc(docId).delete(); } catch (error) { console.error("Error removing document: ", error); alert("Error deleting entry."); } } }
-        const modal = document.getElementById('custom-modal'), modalTitle = document.getElementById('modal-title'), modalText = document.getElementById('modal-text'), modalInput = document.getElementById('modal-input'), modalCancel = document.getElementById('modal-cancel'), modalConfirm = document.getElementById('modal-confirm'); let modalResolve = null;
-        function showModal(config) { modalTitle.textContent = config.title; modalText.textContent = config.text || ''; modalInput.style.display = config.showInput ? 'block' : 'none'; if(config.showInput) modalInput.value = config.inputValue || ''; modalConfirm.textContent = config.confirmText || 'Confirm'; modal.style.display = 'flex'; return new Promise((resolve) => { modalResolve = resolve; }); }
-        modalCancel.addEventListener('click', () => { modal.style.display = 'none'; if (modalResolve) modalResolve({ confirmed: false }); });
-        modalConfirm.addEventListener('click', () => { modal.style.display = 'none'; if (modalResolve) modalResolve({ confirmed: true, value: modalInput.value }); });
-        function syncAndRenderList(collectionName, listElementId, isCandle = false) { db.collection(collectionName).orderBy("timestamp", "desc").onSnapshot(snapshot => { const listElement = document.getElementById(listElementId); listElement.innerHTML = ""; if (snapshot.empty) { listElement.innerHTML = "<li>Nothing here yet. Be the first to share!</li>"; return; } snapshot.forEach(doc => { const item = doc.data(); const li = document.createElement("li"); li.setAttribute('data-id', doc.id); const textSpan = document.createElement('span'); textSpan.textContent = isCandle ? `🕯️ ${item.text}` : `"${item.text}"`; textSpan.classList.add('quote-text'); const likeContainer = document.createElement('div'); likeContainer.classList.add('like-container'); const likeBtn = document.createElement('button'); likeBtn.classList.add('like-btn'); const userHasLiked = item.likes && item.likes.includes(userId); likeBtn.innerHTML = userHasLiked ? '❤️' : '♡'; const likeCount = document.createElement('span'); likeCount.classList.add('like-count'); likeCount.textContent = item.likeCount != null ? item.likeCount : (item.likes ? item.likes.length : 0); likeContainer.appendChild(likeBtn); likeContainer.appendChild(likeCount); const actionsDiv = document.createElement('div'); actionsDiv.classList.add('quote-actions'); const editBtn = document.createElement('button'); editBtn.textContent = 'Edit'; editBtn.classList.add('edit-btn'); const deleteBtn = document.createElement('button'); deleteBtn.textContent = 'Delete'; deleteBtn.classList.add('delete-btn'); actionsDiv.appendChild(editBtn); actionsDiv.appendChild(deleteBtn); li.appendChild(textSpan); li.appendChild(likeContainer); li.appendChild(actionsDiv); listElement.appendChild(li); }); }, error => { console.error(`Error listening to ${collectionName}:`, error); }); }
-        function setupListEventListeners(listId, collectionName) { document.getElementById(listId).addEventListener('click', (e) => { const target = e.target; const li = target.closest('li[data-id]'); if (!li) return; const docId = li.getAttribute('data-id'); if (target.classList.contains('edit-btn')) { const textElement = li.querySelector('.quote-text'); let currentText = textElement ? textElement.textContent.replace('🕯️ ', '').replace(/"/g, '').trim() : ''; editItem(collectionName, docId, currentText); } else if (target.classList.contains('delete-btn')) { deleteItem(collectionName, docId); } else if (target.classList.contains('like-btn')) { handleLike(collectionName, docId); } }); }
-        
+        // Journal Logic
+        const journal = {
+            promptEl: document.getElementById('prompt-display'),
+            entryEl: document.getElementById('journal-entry'),
+            getEntries: () => JSON.parse(localStorage.getItem('journalEntries') || '[]'),
+            saveEntries: entries => localStorage.setItem('journalEntries', JSON.stringify(entries)),
+            newPrompt: () => journal.promptEl.textContent = prompts[Math.floor(Math.random() * prompts.length)]
+        };
+        document.getElementById('save-journal-btn').addEventListener('click', () => {
+            if(!journal.entryEl.value.trim()) return alert("Please write something in your journal entry.");
+            const entries = journal.getEntries();
+            entries.unshift({ id: Date.now(), prompt: journal.promptEl.textContent, entry: journal.entryEl.value, date: new Date().toISOString() });
+            journal.saveEntries(entries);
+            journal.entryEl.value = '';
+            alert('Journal entry saved!');
+        });
+        document.getElementById('view-journal-btn').addEventListener('click', () => {
+            let html = journal.getEntries().map(entry => `
+                <div class="journal-entry-display" data-id="${entry.id}">
+                    <p><strong>${entry.prompt}</strong></p>
+                    <p>${entry.entry.replace(/\n/g, '<br>')}</p>
+                    <div>
+                        <small>${new Date(entry.date).toLocaleString()}</small>
+                        <button class="delete-journal-btn">Delete</button>
+                    </div>
+                </div>`).join('');
+            if(!html) html = "<p>You have no journal entries yet.</p>";
+            showModal({ title: 'My Journal', showJournal: true, journalHTML: html, confirmText: 'Close' });
+        });
+        modal.journalContent.addEventListener('click', e => {
+            if (e.target.matches('.delete-journal-btn')) {
+                const entryId = e.target.closest('.journal-entry-display').dataset.id;
+                let entries = journal.getEntries().filter(entry => entry.id != entryId);
+                journal.saveEntries(entries);
+                e.target.closest('.journal-entry-display').remove();
+            }
+        });
+        journal.promptEl.addEventListener('click', journal.newPrompt);
+        journal.newPrompt();
+
+        // Initializations
         document.getElementById("theme-toggle").addEventListener("change", () => document.body.classList.toggle("dark-mode"));
-        document.getElementById("show-random-quote-btn").addEventListener('click', () => showRandomItem('random-quote-display', quotes.map(q => q.text)));
-        document.getElementById("show-journal-prompt-btn").addEventListener('click', () => showRandomItem('prompt-display', prompts));
-        document.getElementById("show-family-question-btn").addEventListener('click', () => showRandomItem('family-question-display', familyQuestions));
-        document.getElementById("submit-quote-btn").addEventListener("click", () => addItem(COLLECTIONS.submittedQuotes, 'user-quote-input'));
-        document.getElementById("submit-reflection-btn").addEventListener("click", () => addItem(COLLECTIONS.reflections, 'hope-input'));
-        document.getElementById("light-candle-btn").addEventListener("click", () => addItem(COLLECTIONS.candles, 'candle-input'));
-        document.querySelectorAll(".filter-btn").forEach(button => { button.addEventListener("click", () => { const isActive = button.classList.contains("active"); document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active")); if (isActive) { document.getElementById("quote-list").innerHTML = ""; } else { const category = button.getAttribute("data-category"); showFilteredQuotes(category); button.classList.add("active"); } }); });
-        function showFilteredQuotes(category = "all") { const list = document.getElementById("quote-list"); list.innerHTML = ""; const filtered = category === "all" ? quotes : quotes.filter(q => q.category.toLowerCase() === category.toLowerCase()); if (filtered.length === 0) { list.innerHTML = "<li class='quote-card'>No quotes here.</li>"; } else { filtered.forEach(q => { const li = document.createElement("li"); li.classList.add("quote-card"); li.textContent = q.text; list.appendChild(li); }); } };
-        function showRandomItem(displayElementId, dataArray) { const box = document.getElementById(displayElementId); const randomIndex = Math.floor(Math.random() * dataArray.length); box.textContent = dataArray[randomIndex]; box.style.display = 'block'; box.classList.remove("fade-in"); void box.offsetWidth; box.classList.add("fade-in"); }
-        ['random-quote-display', 'prompt-display', 'family-question-display'].forEach(id => { const el = document.getElementById(id); if(el) el.addEventListener('dblclick', () => el.style.display = 'none'); });
         
-        document.getElementById("daily-quote").textContent = quotes[Math.floor(Math.random() * quotes.length)].text;
-        
-        syncAndRenderList(COLLECTIONS.submittedQuotes, 'submitted-quotes-list');
-        syncAndRenderList(COLLECTIONS.reflections, 'reflections-list');
-        syncAndRenderList(COLLECTIONS.candles, 'candle-wall-list', true);
+        setupListControls('community-controls', COLLECTIONS.submittedQuotes, 'submitted-quotes-list');
+        setupListControls('reflection-controls', COLLECTIONS.reflections, 'reflections-list');
+        db.collection(COLLECTIONS.candles).orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+            const listElement = document.getElementById('candle-wall-list');
+            listElement.innerHTML = "";
+            snapshot.docs.forEach(doc => listElement.appendChild(createListItem(doc, COLLECTIONS.candles, true)));
+        });
         
         setupListEventListeners('submitted-quotes-list', COLLECTIONS.submittedQuotes);
         setupListEventListeners('reflections-list', COLLECTIONS.reflections);
         setupListEventListeners('candle-wall-list', COLLECTIONS.candles);
 
         displayQuoteOfTheWeek();
-        
         handleResponsiveBoard();
         window.addEventListener('resize', handleResponsiveBoard);
+        
+        // Static content buttons
+        document.getElementById('show-random-quote-btn').addEventListener('click', () => document.getElementById('random-quote-display').style.display = 'block');
+        document.getElementById('show-family-question-btn').addEventListener('click', () => document.getElementById('family-question-display').style.display = 'block');
+        // Filter buttons for static quotes
+        document.querySelectorAll(".filter-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+                button.classList.add("active");
+                const category = button.getAttribute("data-category");
+                const list = document.getElementById("quote-list");
+                list.innerHTML = "";
+                const filtered = category === "all" ? allStaticQuotes : allStaticQuotes.filter(q => q.category === category);
+                filtered.forEach(q => {
+                    const li = document.createElement("li");
+                    li.className = 'quote-card';
+                    li.textContent = q.text;
+                    list.appendChild(li);
+                });
+            });
+        });
     });
   </script>
 </body>
