@@ -278,6 +278,10 @@
       }
     }
   </style>
+  <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js"></script>
+
 </head>
 <body>
   <header>
@@ -460,20 +464,21 @@
       const familyQuestions = [ "What is a piece of advice you received from an elder that you want to pass on?", "What family tradition do you cherish the most and why?", "What is a story about your parents or grandparents that your descendants should know?", "What do you want your children/grandchildren to know about what love means to you?", "What was the happiest moment of your life so far, and who was with you?", "Describe a challenge you overcame and what it taught you about resilience.", "What is the most important lesson you've learned about forgiveness?", "If you could give your younger family members one 'secret to life,' what would it be?", "What do you want your legacy to be within your family?", "What smell, sound, or taste immediately reminds you of home and family?", "What's a piece of music that defines a period of your life?", "Describe a time you felt truly proud of a family member.", "What is the best meal you ever had, and who did you share it with?", "What is something you learned from a mistake that you want your family to know?", "If you could travel back to one moment in your family's history, where would you go?", "What does 'home' mean to you, beyond just a physical place?", "Who was your childhood hero and why?", "What is a small, everyday moment that brings you immense joy?", "What is a skill you're proud of that you'd love to teach someone in your family?", "How did you meet your best friend?", "What is a book or movie that changed the way you see the world?", "Describe a time you had to be brave.", "What is your favorite memory of a holiday with your family?", "What do you admire most about your parents?", "What do you hope your grandchildren will say about you one day?", "What is a family story that always makes you laugh?", "What value do you believe is most important to instill in the next generation?", "Describe a place that feels sacred or special to you.", "What's a dream you still hope to achieve?", "What has been the most surprising thing about getting older?", "What's a family recipe you want to make sure gets passed down?", "Describe a time your family came together to support someone.", "What is your favorite photo of your family and what's the story behind it?", "What's a song that reminds you of your childhood?", "What's a piece of advice you'd give your 20-year-old self?", "What is a family inside joke that you can share?", "What's the most beautiful place you've ever visited with family?", "What's a lesson you learned from a pet?", "What's a story about a family heirloom?", "What's something you admire about your sibling(s)?", "What's a time you felt perfectly content?", "What's a family myth or legend?", "What's the best gift you've ever received and why was it so special?", "What's a challenge your family faced and how did you overcome it together?", "What's your earliest memory?", "What's something you want to be remembered for?", "What's a tradition you started or want to start in your own family?", "What's a moment of pure, unexpected kindness you witnessed or received?", "What's a piece of local history from where you grew up that your family should know?", "If you could have dinner with any three relatives (living or passed), who would they be and why?"];
 
       // --- Local Storage Keys ---
-      const STORAGE_KEYS = {
-          quotes: 'community-quotes',
-          reflections: 'hope-reflections',
-          candles: 'candle-messages'
-      };
+     const STORAGE_KEYS = {
+  reflections: "reflections",
+  candles: "candles"
+};
 
       // --- Local Storage Functions ---
-      function getFromStorage(key) {
-          return JSON.parse(localStorage.getItem(key)) || [];
-      }
+     async function getFromStorage(key) {
+  const snapshot = await db.collection(key).orderBy("timestamp", "desc").get();
+  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+}
 
-      function saveToStorage(key, data) {
-          localStorage.setItem(key, JSON.stringify(data));
-      }
+async function saveToStorage(key, item) {
+  await db.collection(key).add(item);
+}
+
 
       function renderList(listId, storageKey) {
           const items = getFromStorage(storageKey);
@@ -609,12 +614,15 @@
           });
       }
 
-      async function editItem(id, currentText, storageKey) {
-          const newText = await showModal({
-              title: 'Edit Entry',
-              showInput: true,
-              inputValue: currentText,
-              confirmText: 'Save'
+      async function editItem(storageKey, itemId) {
+  const newText = prompt("Edit your entry:");
+  if (newText !== null) {
+    await db.collection(storageKey).doc(itemId).update({ text: newText });
+    const listId = storageKey === STORAGE_KEYS.candles ? "candle-list" : "reflections-list";
+    renderList(listId, storageKey);
+  }
+}
+
           });
 
           if (newText && newText.trim() !== "" && newText !== currentText) {
@@ -628,21 +636,12 @@
           }
       }
 
-      async function deleteItem(id, storageKey) {
-          const confirmed = await showModal({
-              title: 'Confirm Deletion',
-              text: 'Are you sure you want to delete this entry?',
-              showInput: false,
-              confirmText: 'Delete'
-          });
+      async function deleteItem(storageKey, itemId) {
+  await db.collection(storageKey).doc(itemId).delete();
+  const listId = storageKey === STORAGE_KEYS.candles ? "candle-list" : "reflections-list";
+  renderList(listId, storageKey);
+}
 
-          if (confirmed) {
-              let items = getFromStorage(storageKey);
-              items = items.filter(item => item.id !== id);
-              saveToStorage(storageKey, items);
-              renderList(document.querySelector(`[data-id="${id}"]`).closest('ul').id, storageKey);
-          }
-      }
 
       // ===== INITIALIZATION & EVENT LISTENERS =====
       
@@ -693,6 +692,46 @@
               if (target.classList.contains('delete-btn')) {
                   deleteItem(id, storageKey);
               }
+            function liveSync(collectionKey, listId, isCandle = false) {
+  const q = query(collection(db, collectionKey), orderBy("timestamp", "desc"));
+  onSnapshot(q, snapshot => {
+    const listElement = document.getElementById(listId);
+    listElement.innerHTML = "";
+
+    snapshot.forEach(doc => {
+      const item = doc.data();
+      const li = document.createElement("li");
+      li.setAttribute("data-id", doc.id);
+
+      const span = document.createElement("span");
+      span.textContent = isCandle ? `🕯️ ${item.text || item.name}` : `"${item.text}"`;
+      span.classList.add("quote-text");
+
+      const actionsDiv = document.createElement("div");
+      actionsDiv.classList.add("quote-actions");
+
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.classList.add("edit-btn");
+      actionsDiv.appendChild(editBtn);
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.classList.add("delete-btn");
+      actionsDiv.appendChild(deleteBtn);
+
+      li.appendChild(span);
+      li.appendChild(actionsDiv);
+      listElement.appendChild(li);
+    });
+  });
+}
+
+                  // At the end of the DOMContentLoaded block, before this: });
+      liveSync("reflections", "reflections-list");
+      liveSync("candles", "candle-wall", true);
+    });
+
           });
       }
 
@@ -701,9 +740,40 @@
       setupListEventListeners('candle-wall', STORAGE_KEYS.candles);
 
       // Initial render of lists from local storage
-      renderList('submitted-quotes', STORAGE_KEYS.quotes);
-      renderList('reflections-list', STORAGE_KEYS.reflections);
-      renderList('candle-wall', STORAGE_KEYS.candles);
+     async function renderList(listId, storageKey) {
+  const items = await getFromStorage(storageKey);
+  const listElement = document.getElementById(listId);
+  listElement.innerHTML = "";
+
+  const isCandle = storageKey === STORAGE_KEYS.candles;
+
+  items.forEach(itemData => {
+    const li = document.createElement("li");
+    li.setAttribute("data-id", itemData.id);
+
+    const textSpan = document.createElement("span");
+    textSpan.textContent = isCandle ? `🕯️ ${itemData.text}` : `"${itemData.text}"`;
+    textSpan.classList.add("quote-text");
+    li.appendChild(textSpan);
+
+    const actionsDiv = document.createElement("div");
+    actionsDiv.classList.add("quote-actions");
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.classList.add("edit-btn");
+    actionsDiv.appendChild(editBtn);
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.classList.add("delete-btn");
+    actionsDiv.appendChild(deleteBtn);
+
+    li.appendChild(actionsDiv);
+    listElement.appendChild(li);
+  });
+}
+
 
       const randomQuoteBox = document.getElementById("random-quote");
       const journalPromptBox = document.getElementById("prompt-display");
@@ -725,6 +795,54 @@
         dailyQuoteElement.textContent = quoteOfDay.text;
       }
     });
+    // --- Firebase Configuration ---
+const firebaseConfig = {
+  apiKey: "AIzaSyC0ka3EiqyN8J_wEXV8b1_1KAZ67CTmBdY",
+  authDomain: "shinewithinlive.firebaseapp.com",
+  projectId: "shinewithinlive",
+  storageBucket: "shinewithinlive.firebasestorage.app",
+  messagingSenderId: "626223295677",
+  appId: "1:626223295677:web:74c56d8938c6d2054e5bd4"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+function liveSync(collectionKey, listId, isCandle = false) {
+  const q = query(collection(db, collectionKey), orderBy("timestamp", "desc"));
+  onSnapshot(q, snapshot => {
+    const listElement = document.getElementById(listId);
+    listElement.innerHTML = "";
+
+    snapshot.forEach(doc => {
+      const item = doc.data();
+      const li = document.createElement("li");
+      li.setAttribute("data-id", doc.id);
+
+      const span = document.createElement("span");
+      span.textContent = isCandle ? `🕯️ ${item.text || item.name}` : `"${item.text}"`;
+      span.classList.add("quote-text");
+
+      const actionsDiv = document.createElement("div");
+      actionsDiv.classList.add("quote-actions");
+
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.classList.add("edit-btn");
+      actionsDiv.appendChild(editBtn);
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.classList.add("delete-btn");
+      actionsDiv.appendChild(deleteBtn);
+
+      li.appendChild(span);
+      li.appendChild(actionsDiv);
+      listElement.appendChild(li);
+    });
+  });
+}
+
   </script>
 </body>
 </html>
