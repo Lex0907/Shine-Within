@@ -10,15 +10,21 @@
   
  <style>
     /* style.css */
+
+    /* MODIFIED: Added animation properties */
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom right, #e0f7fa, #d1c4e9);
+      background: linear-gradient(to bottom right, #e0f7fa, #d1c4e9, #e0f7fa); /* Added third color stop for smoother looping */
       background-image: url('https://www.transparenttextures.com/patterns/vine.png'); /* vine texture */
       color: #333;
       line-height: 1.6;
       transition: background-color 0.3s, color 0.3s;
+      
+      /* --- NEW: These properties create the animation --- */
+      background-size: 400% 400%;
+      animation: moveGradient 15s ease infinite;
     }
 
     body.dark-mode {
@@ -48,7 +54,6 @@
       margin: 0;
       font-size: 1.8rem;
       color: #333;
-      /* MODIFIED: Set a base transparent shadow and transition */
       text-shadow: 0 0 8px transparent; 
       transition: text-shadow 0.3s ease;
       text-align: center;
@@ -57,7 +62,6 @@
     
     body.dark-mode header h1 {
       color: #f1f1f1;
-      /* MODIFIED: Now we only change the shadow's color */
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
     }
 
@@ -76,14 +80,12 @@
       color: #333;
       font-weight: bold;
       position: relative;
-      /* MODIFIED: Set a base transparent shadow and transition */
       text-shadow: 0 0 6px transparent;
       transition: text-shadow 0.3s ease;
     }
     
     body.dark-mode nav a {
       color: #f1f1f1;
-      /* MODIFIED: Now we only change the shadow's color */
       text-shadow: 0 0 6px rgba(230, 244, 255, 0.6);
     }
 
@@ -386,6 +388,13 @@
 
     .qotw-likes .like-btn {
         font-size: 1rem;
+    }
+    
+    /* --- NEW: Animation definition for the background --- */
+    @keyframes moveGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
 </style>
 </head>
