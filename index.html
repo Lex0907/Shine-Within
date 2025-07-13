@@ -1,848 +1,758 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shine Within - Quotes & Positivity</title>
-  <style>
-    /* style.css */
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #e0f7fa, #d1c4e9);
-      background-image: url('https://www.transparenttextures.com/patterns/vine.png'); /* vine texture */
-      color: #333;
-      line-height: 1.6;
-      transition: background-color 0.3s, color 0.3s;
-    }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shine Within - Quotes & Positivity</title>
+  <style>
+    /* style.css */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #e0f7fa, #d1c4e9);
+      background-image: url('https://www.transparenttextures.com/patterns/vine.png'); /* vine texture */
+      color: #333;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
 
-    body.dark-mode {
-      background: #121212;
-      color: #f1f1f1;
-    }
+    body.dark-mode {
+      background: #121212;
+      color: #f1f1f1;
+    }
 
-    header {
-      background: linear-gradient(90deg, #a1c4fd, #c2e9fb);
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      position: relative;
-    }
+    header {
+      background: linear-gradient(90deg, #a1c4fd, #c2e9fb);
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
 
-    body.dark-mode header {
-      background: #2e2e2e;
-      color: #f1f1f1;
-    }
+    body.dark-mode header {
+      background: #2e2e2e;
+      color: #f1f1f1;
+    }
 
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      color: #333;
-      text-shadow: 0 0 5px #fff;
-    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #333;
+      text-shadow: 0 0 5px #fff;
+    }
 
-    nav ul {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
 
-    nav a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      position: relative;
-    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      position: relative;
+    }
 
-    nav a::after {
-      content: '✨';
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      animation: shimmer 2s infinite;
-    }
+    nav a::after {
+      content: '✨';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      animation: shimmer 2s infinite;
+    }
 
-    @keyframes shimmer {
-      0% { opacity: 1; }
-      50% { opacity: 0.2; }
-      100% { opacity: 1; }
-    }
+    @keyframes shimmer {
+      0% { opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
 
-    section {
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-    }
+    section {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
 
-    button {
-      background: linear-gradient(to right, #81ecec, #74b9ff);
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #fff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
-    }
+    button {
+      background: linear-gradient(to right, #81ecec, #74b9ff);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+    }
 
-    button:hover {
-      background: linear-gradient(to right, #74b9ff, #81ecec);
-      transform: translateY(-2px);
-    }
-    
-    button.active {
-      box-shadow: 0 0 15px #81ecec;
-      transform: scale(1.05);
-    }
-    
-    button:disabled {
-        background: #ccc;
-        cursor: not-allowed;
-        transform: none;
-    }
+    button:hover {
+      background: linear-gradient(to right, #74b9ff, #81ecec);
+      transform: translateY(-2px);
+    }
+    
+    button.active {
+      box-shadow: 0 0 15px #81ecec;
+      transform: scale(1.05);
+    }
+    
+    button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+    }
 
-    input[type="text"] {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      width: 100%;
-      box-sizing: border-box;
-    }
+    input[type="text"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
 
-    .community-list {
-      list-style: none;
-      padding: 0;
-      margin-top: 1rem;
-    }
+    .community-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 1rem;
+    }
 
-    .community-list li {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 1rem 1.5rem;
-      margin: 0.5rem 0;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      font-style: italic;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    
-    body.dark-mode .community-list li {
-      background-color: #1f1f1f;
-      color: #f1f1f1;
-    }
-    
-    .quote-actions button {
-        margin-left: 0.5rem;
-        padding: 5px 10px;
-        font-size: 0.8rem;
-    }
-    
-    .quote-text {
-        flex-grow: 1;
-        margin-right: 1rem;
-        word-break: break-word;
-    }
+    .community-list li {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1rem 1.5rem;
+      margin: 0.5rem 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      font-style: italic;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    body.dark-mode .community-list li {
+      background-color: #1f1f1f;
+      color: #f1f1f1;
+    }
+    
+    .quote-actions button {
+        margin-left: 0.5rem;
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .quote-text {
+        flex-grow: 1;
+        margin-right: 1rem;
+        word-break: break-word;
+    }
 
-    .quote-card {
-      background: rgba(230, 244, 255, 0.9);
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      font-style: italic;
-      text-align: center;
-      margin-bottom: 1rem;
-      cursor: pointer; /* Add cursor to indicate it's clickable */
-    }
-    
-    body.dark-mode .quote-card {
-      background-color: #1f1f1f;
-      color: #f1f1f1;
-    }
+    .quote-card {
+      background: rgba(230, 244, 255, 0.9);
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 1rem;
+      cursor: pointer; /* Add cursor to indicate it's clickable */
+    }
+    
+    body.dark-mode .quote-card {
+      background-color: #1f1f1f;
+      color: #f1f1f1;
+    }
 
-    footer {
-      background: linear-gradient(90deg, #a1c4fd, #c2e9fb);
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
-    body.dark-mode footer {
-      background: #2e2e2e;
-      color: #f1f1f1;
-    }
-    
-    /* Theme Switcher */
-    .theme-switch {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      display: inline-block;
-    }
+    footer {
+      background: linear-gradient(90deg, #a1c4fd, #c2e9fb);
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    body.dark-mode footer {
+      background: #2e2e2e;
+      color: #f1f1f1;
+    }
+    
+    /* Theme Switcher */
+    .theme-switch {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: inline-block;
+    }
 
-    .theme-switch input { display: none; }
+    .theme-switch input { display: none; }
 
-    .slider {
-      width: 50px;
-      height: 24px;
-      background-color: #74b9ff;
-      border-radius: 24px;
-      position: relative;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+    .slider {
+      width: 50px;
+      height: 24px;
+      background-color: #74b9ff;
+      border-radius: 24px;
+      position: relative;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-    .slider::before {
-      content: "☀️";
-      position: absolute;
-      font-size: 16px;
-      line-height: 24px;
-      left: 4px;
-      transition: 0.3s;
-    }
+    .slider::before {
+      content: "☀️";
+      position: absolute;
+      font-size: 16px;
+      line-height: 24px;
+      left: 4px;
+      transition: 0.3s;
+    }
 
-    input:checked + .slider { background-color: #2e2e2e; }
+    input:checked + .slider { background-color: #2e2e2e; }
 
-    input:checked + .slider::before {
-      content: "🌙";
-      transform: translateX(26px);
-    }
+    input:checked + .slider::before {
+      content: "🌙";
+      transform: translateX(26px);
+    }
 
-    /* Interactive Elements */
-    .submission-box {
-      display: flex;
-      gap: 0.5rem;
-      margin: 1rem 0;
-    }
+    /* Interactive Elements */
+    .submission-box {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
 
-    #candle-section {
-      text-align: center;
-    }
-    
-    /* Modal Styles */
-    .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.5);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-    }
-    .modal-content {
-        background: white;
-        padding: 2rem;
-        border-radius: 10px;
-        width: 90%;
-        max-width: 500px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-    body.dark-mode .modal-content {
-        background: #2e2e2e;
-    }
-    .modal-content h3 {
-        margin-top: 0;
-    }
-    .modal-content input {
-        width: 100%;
-        margin-bottom: 1rem;
-    }
-    .modal-actions {
-        text-align: right;
-    }
-    .modal-actions button {
-        margin-left: 0.5rem;
-    }
+    #candle-section {
+      text-align: center;
+    }
+    
+    /* Modal Styles */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+    .modal-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    body.dark-mode .modal-content {
+        background: #2e2e2e;
+    }
+    .modal-content h3 {
+        margin-top: 0;
+    }
+    .modal-content input {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    .modal-actions {
+        text-align: right;
+    }
+    .modal-actions button {
+        margin-left: 0.5rem;
+    }
 
-    .fade-in { animation: fadeIn 0.8s ease-in-out; }
+    .fade-in { animation: fadeIn 0.8s ease-in-out; }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
-  <!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js"></script>
-
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+    <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Shine Within</h1>
-    <label class="theme-switch">
-      <input type="checkbox" id="theme-toggle" />
-      <span class="slider"></span>
-    </label>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#quotes">Quotes</a></li>
-        <li><a href="#journal">Journal</a></li>
-        <li><a href="#family-questions">Family</a></li>
-        <li><a href="#playlist">Playlist</a></li>
-        <li><a href="#reflection">Reflection</a></li>
-        <li><a href="#community">Community</a></li>
-        <li><a href="#candle-section">Candle</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <section id="home">
-    <h2>Welcome to Your Dose of Light</h2>
-    <div id="daily-quote" class="quote-card">Quote of the Day loading...</div>
-    <p>Here you’ll find handpicked quotes and messages to uplift, inspire, and remind you of your strength.</p>
-    <button onclick="showRandomQuote()">Get a Random Quote</button>
-    <div id="random-quote" style="display: none;"></div>
-  </section>
-
-  <section id="quotes">
-    <h2>Positivity Quotes</h2>
-    <div class="filters">
-      <button class="filter-btn" data-category="all">All</button>
-      <button class="filter-btn" data-category="strength">Strength</button>
-      <button class="filter-btn" data-category="healing">Healing</button>
-      <button class="filter-btn" data-category="growth">Growth</button>
-      <button class="filter-btn" data-category="encouragement">Encouragement</button>
-    </div>
-    <ul id="quote-list"></ul>
-  </section>
-
-  <section id="journal">
-    <h2>Self-Care Journal Prompt</h2>
-    <p>Need a moment to reflect? Click the button below to receive a gentle prompt to guide your thoughts.</p>
-    <button onclick="showJournalPrompt()">Give Me a Prompt</button>
-    <div id="prompt-display" class="quote-card" style="margin-top: 1rem; display: none;"></div>
-  </section>
-
-  <section id="family-questions">
-    <h2>Heart Full Family Questions</h2>
-    <p>What stories and wisdom do you want to pass on? Get a question to help you share your heart with future generations.</p>
-    <button onclick="showFamilyQuestion()">Ask a Family Question</button>
-    <div id="family-question-display" class="quote-card" style="margin-top: 1rem; display: none;"></div>
-  </section>
-
-  <section id="playlist">
-    <h2>Positivity Playlist</h2>
-    <p>Here’s a collection of songs to lift your spirit, calm your heart, and help you feel connected.</p>
-    <ul class="community-list">
-      <li><strong>"Keep Your Head Up"</strong> – Andy Grammer</li>
-      <li><strong>"Scars to Your Beautiful"</strong> – Alessia Cara</li>
-      <li><strong>"Rescue"</strong> – Lauren Daigle</li>
-      <li><strong>"Rainbow"</strong> – Kacey Musgraves</li>
-      <li><strong>"Fight Song"</strong> – Rachel Platten</li>
-      <li><strong>"You Say"</strong> – Lauren Daigle</li>
-      <li><strong>"Rise Up"</strong> – Andra Day</li>
-      <li><strong>"Pocketful of Sunshine"</strong> – Natasha Bedingfield 🌻</li>
-      <li><strong>"Brave"</strong> – Sara Bareilles</li>
-      <li><strong>"Who You Are"</strong> – Jessie J</li>
-    </ul>
-  </section>
-
-  <section id="reflection">
-    <h2>What Brings You Hope?</h2>
-    <p>Leave a short, anonymous answer below and share a little light with others who visit.</p>
-    <div class="submission-box">
-      <input type="text" id="hope-input" placeholder="Your hopeful thought..." />
-      <button id="submit-reflection">Submit Reflection</button>
-    </div>
-    <ul id="reflections-list" class="community-list"></ul>
-  </section>
-
-  <section id="community">
-    <h2>Share Your Favorite Quote</h2>
-    <p>Have a favorite quote? Share it with the world:</p>
-    <div class="submission-box">
-      <input type="text" id="user-quote" placeholder="Enter your quote here" />
-      <button id="submit-quote">Submit Quote</button>
-    </div>
-    <h3>Community Quotes</h3>
-    <ul id="submitted-quotes" class="community-list"></ul>
-  </section>
-  
-  <section id="candle-section">
-    <h2>Light a Candle</h2>
-    <p>Honor someone you miss or carry in your heart by lighting a digital candle and sharing a message of remembrance or hope.</p>
-    <div class="submission-box">
-        <input type="text" id="candle-input" placeholder="Type their name or a message...">
-        <button id="light-candle-btn">Light Candle 🕯️</button>
-    </div>
-    <ul id="candle-wall" class="community-list"></ul>
-  </section>
-
-  <section id="about">
-    <h2>About This Site</h2>
-    <p>This space was created to spread light in dark times, to remind you that you matter, and to share healing words. Every quote here is chosen with heart.</p>
-  </section>
-
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <p>Have a quote you want featured or want to connect? Email: <a href="mailto:leann8285@gmail.com">leann8285@gmail.com</a></p>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 ShineWithinWisdomWaves. Created with heart by Alexis Kendle.</p>
-  </footer>
-
-  <!-- Custom Modal -->
-  <div id="custom-modal" class="modal-overlay">
-      <div class="modal-content">
-          <h3 id="modal-title">Edit Entry</h3>
-          <p id="modal-text"></p>
-          <input type="text" id="modal-input" />
-          <div class="modal-actions">
-              <button id="modal-cancel">Cancel</button>
-              <button id="modal-confirm">Confirm</button>
-          </div>
-      </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // --- Data Arrays ---
-      const quotes = [
-        { text: "You are not behind — you are becoming.", category: "Growth" },
-        { text: "Just because it's hard doesn't mean you're weak. It means you're trying.", category: "Encouragement" },
-        { text: "Healing isn't pretty, but you're still doing it.", category: "Healing" },
-        { text: "You’ve already survived 100% of your worst days.", category: "Strength" },
-        { text: "The cracks are where the light gets in.", category: "Healing" },
-        { text: "You’re allowed to be both a masterpiece and a work in progress.", category: "Growth" },
-        { text: "You’re stronger than the storm you’re walking through.", category: "Strength" },
-        { text: "Small steps are still steps. Keep going.", category: "Encouragement" },
-        { text: "The human spirit is stronger than anything that can happen to it.", category: "Strength" },
-        { text: "A hero is an ordinary individual who finds the strength to persevere and endure in spite of overwhelming obstacles.", category: "Strength" },
-        { text: "Where there is no struggle, there is no strength.", category: "Strength" },
-        { text: "Strength does not come from winning. Your struggles develop your strengths.", category: "Strength" },
-        { text: "Fall down seven times, stand up eight.", category: "Strength" },
-        { text: "The oak fought the wind and was broken, the willow bent when it must and survived.", category: "Strength" },
-        { text: "You have power over your mind — not outside events. Realize this, and you will find strength.", category: "Strength" },
-        { text: "The wound is the place where the Light enters you.", category: "Healing" },
-        { text: "Give yourself the same care and attention that you give to others and watch yourself bloom.", category: "Healing" },
-        { text: "Healing comes in waves, and maybe today the wave hits the shore. And maybe tomorrow it will pull back. And that's okay.", category: "Healing" },
-        { text: "Your heart knows the way. Run in that direction.", category: "Healing" },
-        { text: "Be gentle with yourself, you're doing the best you can.", category: "Healing" },
-        { text: "Sometimes the healing is in the quiet, in the stillness, in the learning to be with yourself.", category: "Healing" },
-        { text: "It is not the load that breaks you down, it is the way you carry it.", category: "Healing" },
-        { text: "To heal a wound, you need to stop touching it.", category: "Healing" },
-        { text: "The only time you are actually growing is when you are uncomfortable.", category: "Growth" },
-        { text: "Do not be afraid to give up the good to go for the great.", category: "Growth" },
-        { text: "Every moment is a fresh beginning.", category: "Growth" },
-        { text: "The journey of a thousand miles begins with a single step.", category: "Growth" },
-        { text: "What you do makes a difference, and you have to decide what kind of difference you want to make.", category: "Growth" },
-        { text: "Become a student of change. It is the only thing that will remain constant.", category: "Growth" },
-        { text: "It's not about being the best. It's about being better than you were yesterday.", category: "Growth" },
-        { text: "Mistakes are proof that you are trying.", category: "Growth" },
-        { text: "Just for the record darling, not all positive change feels positive in the beginning.", category: "Encouragement" },
-        { text: "Even the darkest night will end and the sun will rise.", category: "Encouragement" },
-        { text: "This too shall pass. It might pass like a kidney stone, but it will pass.", category: "Encouragement" },
-        { text: "It's okay to not be okay. It's not okay to give up.", category: "Encouragement" },
-        { text: "You are doing better than you think you are.", category: "Encouragement" },
-        { text: "Breathe. You're going to be okay. You've gotten through all of your bad days so far.", category: "Encouragement" },
-        { text: "Look for something positive in each day, even if some days you have to look a little harder.", category: "Encouragement" }
-      ];
-      
-      const prompts = [ "What is something you need to let go of today?", "What would you say to your younger self?", "What does healing look like for you right now?", "Write down 3 things you’re proud of yourself for.", "What is something you’ve survived that you never thought you would?", "If you could speak to someone you miss, what would you tell them?", "What does being at peace mean to you?", "How have you grown in the past year — emotionally or spiritually?", "Who are you when no one else is around?", "What’s one kind thing you can do for yourself this week?", "What is a boundary you need to set for your own well-being?", "Describe a place where you feel completely at ease. What makes it so peaceful?", "What's a compliment you've received that you've never forgotten?", "Write a letter of forgiveness to yourself for a past mistake.", "What is your body asking for today? (e.g., rest, movement, nourishment)", "List five things you can see, four things you can feel, three things you can hear, two things you can smell, and one thing you can taste right now.", "What's a fear that is holding you back, and what's one small step you can take to face it?", "What does success look like to you, outside of career or money?", "Describe a time you felt truly understood by someone.", "What's a simple pleasure you can gift yourself today?", "How can you show more compassion to yourself when you're struggling?", "What is a quality you admire in others that you also possess?", "Write down a worry and then write down a more compassionate, reassuring thought to counter it.", "What are you grateful for in this exact moment?", "What is a creative activity that makes you lose track of time?", "What's a difficult emotion you're feeling right now? Allow yourself to sit with it without judgment.", "Who in your life makes you feel energized and supported?", "What is a promise you want to make to yourself for the upcoming week?", "Describe your perfect, restful day from morning to night.", "What is a limiting belief you're ready to challenge?", "What part of your life is currently bringing you the most joy?", "How do you recharge when you feel drained?", "What is something you've accomplished that you haven't given yourself enough credit for?", "Write about a time you felt connected to nature.", "What is a song that lifts your spirits, and why?", "What is a 'win' you've had this week, no matter how small?", "What are you looking forward to?", "If your body could talk, what would it thank you for?", "What is an area of your life where you'd like to ask for help?", "End this entry with a single word that describes how you want to feel tomorrow."];
-
-      const familyQuestions = [ "What is a piece of advice you received from an elder that you want to pass on?", "What family tradition do you cherish the most and why?", "What is a story about your parents or grandparents that your descendants should know?", "What do you want your children/grandchildren to know about what love means to you?", "What was the happiest moment of your life so far, and who was with you?", "Describe a challenge you overcame and what it taught you about resilience.", "What is the most important lesson you've learned about forgiveness?", "If you could give your younger family members one 'secret to life,' what would it be?", "What do you want your legacy to be within your family?", "What smell, sound, or taste immediately reminds you of home and family?", "What's a piece of music that defines a period of your life?", "Describe a time you felt truly proud of a family member.", "What is the best meal you ever had, and who did you share it with?", "What is something you learned from a mistake that you want your family to know?", "If you could travel back to one moment in your family's history, where would you go?", "What does 'home' mean to you, beyond just a physical place?", "Who was your childhood hero and why?", "What is a small, everyday moment that brings you immense joy?", "What is a skill you're proud of that you'd love to teach someone in your family?", "How did you meet your best friend?", "What is a book or movie that changed the way you see the world?", "Describe a time you had to be brave.", "What is your favorite memory of a holiday with your family?", "What do you admire most about your parents?", "What do you hope your grandchildren will say about you one day?", "What is a family story that always makes you laugh?", "What value do you believe is most important to instill in the next generation?", "Describe a place that feels sacred or special to you.", "What's a dream you still hope to achieve?", "What has been the most surprising thing about getting older?", "What's a family recipe you want to make sure gets passed down?", "Describe a time your family came together to support someone.", "What is your favorite photo of your family and what's the story behind it?", "What's a song that reminds you of your childhood?", "What's a piece of advice you'd give your 20-year-old self?", "What is a family inside joke that you can share?", "What's the most beautiful place you've ever visited with family?", "What's a lesson you learned from a pet?", "What's a story about a family heirloom?", "What's something you admire about your sibling(s)?", "What's a time you felt perfectly content?", "What's a family myth or legend?", "What's the best gift you've ever received and why was it so special?", "What's a challenge your family faced and how did you overcome it together?", "What's your earliest memory?", "What's something you want to be remembered for?", "What's a tradition you started or want to start in your own family?", "What's a moment of pure, unexpected kindness you witnessed or received?", "What's a piece of local history from where you grew up that your family should know?", "If you could have dinner with any three relatives (living or passed), who would they be and why?"];
-
-      // --- Local Storage Keys ---
-     const STORAGE_KEYS = {
-  reflections: "reflections",
-  candles: "candles"
-};
-
-      // --- Local Storage Functions ---
-     async function getFromStorage(key) {
-  const snapshot = await db.collection(key).orderBy("timestamp", "desc").get();
-  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-}
-
-async function saveToStorage(key, item) {
-  await db.collection(key).add(item);
-}
-
-
-      function renderList(listId, storageKey) {
-          const items = getFromStorage(storageKey);
-          const listElement = document.getElementById(listId);
-          listElement.innerHTML = ""; // Clear the list
-
-          // Sort by timestamp, newest first
-          items.sort((a, b) => b.timestamp - a.timestamp);
-          
-          const isCandle = storageKey === STORAGE_KEYS.candles;
-
-          items.forEach(itemData => {
-              const li = document.createElement("li");
-              li.setAttribute('data-id', itemData.id);
-
-              const textSpan = document.createElement('span');
-              textSpan.textContent = isCandle ? `🕯️ ${itemData.text}` : `"${itemData.text}"`;
-              textSpan.classList.add('quote-text');
-              li.appendChild(textSpan);
-
-              const actionsDiv = document.createElement('div');
-              actionsDiv.classList.add('quote-actions');
-
-              const editBtn = document.createElement('button');
-              editBtn.textContent = 'Edit';
-              editBtn.classList.add('edit-btn');
-              actionsDiv.appendChild(editBtn);
-
-              const deleteBtn = document.createElement('button');
-              deleteBtn.textContent = 'Delete';
-              deleteBtn.classList.add('delete-btn');
-              actionsDiv.appendChild(deleteBtn);
-
-              li.appendChild(actionsDiv);
-              listElement.appendChild(li);
-          });
-      }
-
-      // ===== Modal Logic =====
-      const modal = document.getElementById('custom-modal');
-      const modalTitle = document.getElementById('modal-title');
-      const modalText = document.getElementById('modal-text');
-      const modalInput = document.getElementById('modal-input');
-      const modalCancel = document.getElementById('modal-cancel');
-      const modalConfirm = document.getElementById('modal-confirm');
-      let modalResolve = null;
-
-      function showModal(config) {
-          modalTitle.textContent = config.title;
-          modalText.textContent = config.text || '';
-          modalInput.style.display = config.showInput ? 'block' : 'none';
-          modalInput.value = config.inputValue || '';
-          modalConfirm.textContent = config.confirmText || 'Confirm';
-          
-          modal.style.display = 'flex';
-
-          return new Promise((resolve) => {
-              modalResolve = resolve;
-          });
-      }
-
-      modalCancel.addEventListener('click', () => {
-          modal.style.display = 'none';
-          if (modalResolve) modalResolve(null);
-      });
-
-      modalConfirm.addEventListener('click', () => {
-          modal.style.display = 'none';
-          if (modalResolve) modalResolve(modalInput.style.display === 'none' ? true : modalInput.value);
-      });
-
-      // ===== GLOBAL FUNCTIONS =====
-      window.showJournalPrompt = function() {
-          const box = document.getElementById('prompt-display');
-          const randomIndex = Math.floor(Math.random() * prompts.length);
-          box.textContent = prompts[randomIndex];
-          box.style.display = 'block';
-          box.classList.remove("fade-in");
-          void box.offsetWidth;
-          box.classList.add("fade-in");
-      }
-
-      window.showFamilyQuestion = function() {
-          const box = document.getElementById('family-question-display');
-          const randomIndex = Math.floor(Math.random() * familyQuestions.length);
-          box.textContent = familyQuestions[randomIndex];
-          box.style.display = 'block';
-          box.classList.remove("fade-in");
-          void box.offsetWidth;
-          box.classList.add("fade-in");
-      }
-      
-      window.showRandomQuote = function() {
-          const box = document.getElementById("random-quote");
-          const randomIndex = Math.floor(Math.random() * quotes.length);
-          box.textContent = quotes[randomIndex].text;
-          box.style.display = 'block';
-          box.style.marginTop = '1.5rem';
-          box.classList.remove("fade-in");
-          void box.offsetWidth;
-          box.classList.add("fade-in");
-          box.classList.add("quote-card");
-      }
-      
-      function addItem(storageKey, inputElementId) {
-          const input = document.getElementById(inputElementId);
-          const text = input.value.trim();
-          if (text) {
-              const items = getFromStorage(storageKey);
-              const newItem = {
-                  id: crypto.randomUUID(),
-                  text: text,
-                  timestamp: Date.now()
-              };
-              items.push(newItem);
-              saveToStorage(storageKey, items);
-              input.value = "";
-              renderList(document.getElementById(inputElementId).closest('section').querySelector('.community-list').id, storageKey);
-          }
-      }
-
-      const showQuotes = (category = "all") => {
-          const list = document.getElementById("quote-list");
-          list.innerHTML = "";
-          const filtered = category === "all"
-            ? quotes
-            : quotes.filter(q => q.category.toLowerCase() === category.toLowerCase());
-          filtered.forEach(q => {
-            const li = document.createElement("li");
-            li.classList.add("quote-card");
-            li.textContent = q.text;
-            list.appendChild(li);
-          });
-      }
-
-      async function editItem(storageKey, itemId) {
-  const newText = prompt("Edit your entry:");
-  if (newText !== null) {
-    await db.collection(storageKey).doc(itemId).update({ text: newText });
-    const listId = storageKey === STORAGE_KEYS.candles ? "candle-list" : "reflections-list";
-    renderList(listId, storageKey);
-  }
-}
-
-          });
-
-          if (newText && newText.trim() !== "" && newText !== currentText) {
-              const items = getFromStorage(storageKey);
-              const itemIndex = items.findIndex(item => item.id === id);
-              if (itemIndex > -1) {
-                  items[itemIndex].text = newText.trim();
-                  saveToStorage(storageKey, items);
-                  renderList(document.querySelector(`[data-id="${id}"]`).closest('ul').id, storageKey);
-              }
-          }
-      }
-
-      async function deleteItem(storageKey, itemId) {
-  await db.collection(storageKey).doc(itemId).delete();
-  const listId = storageKey === STORAGE_KEYS.candles ? "candle-list" : "reflections-list";
-  renderList(listId, storageKey);
-}
-
-
-      // ===== INITIALIZATION & EVENT LISTENERS =====
-      
-      const themeToggle = document.getElementById("theme-toggle");
-      themeToggle.addEventListener("change", () => {
-        document.body.classList.toggle("dark-mode");
-      });
-
-      const filterButtons = document.querySelectorAll(".filter-btn");
-      filterButtons.forEach(button => {
-        button.addEventListener("click", () => {
-          const list = document.getElementById("quote-list");
-          if (button.classList.contains('active')) {
-              list.innerHTML = "";
-              button.classList.remove('active');
-          } else {
-              const category = button.getAttribute("data-category");
-              showQuotes(category);
-              filterButtons.forEach(btn => btn.classList.remove("active"));
-              button.classList.add("active");
-          }
-        });
-      });
-
-      document.getElementById("submit-quote").addEventListener("click", () => addItem(STORAGE_KEYS.quotes, 'user-quote'));
-      document.getElementById("submit-reflection").addEventListener("click", () => addItem(STORAGE_KEYS.reflections, 'hope-input'));
-      document.getElementById("light-candle-btn").addEventListener("click", () => addItem(STORAGE_KEYS.candles, 'candle-input'));
-
-      function setupListEventListeners(listId, storageKey) {
-          document.getElementById(listId).addEventListener('click', (e) => {
-              const target = e.target;
-              const li = target.closest('li');
-              if (!li) return;
-              
-              const id = li.getAttribute('data-id');
-              const textElement = li.querySelector('.quote-text');
-              let currentText = textElement ? textElement.textContent : '';
-              
-              if (storageKey === STORAGE_KEYS.candles) {
-                  currentText = currentText.replace('🕯️ ', '').trim();
-              } else {
-                  currentText = currentText.slice(1, -1);
-              }
-
-              if (target.classList.contains('edit-btn')) {
-                  editItem(id, currentText, storageKey);
-              }
-              if (target.classList.contains('delete-btn')) {
-                  deleteItem(id, storageKey);
-              }
-            function liveSync(collectionKey, listId, isCandle = false) {
-  const q = query(collection(db, collectionKey), orderBy("timestamp", "desc"));
-  onSnapshot(q, snapshot => {
-    const listElement = document.getElementById(listId);
-    listElement.innerHTML = "";
-
-    snapshot.forEach(doc => {
-      const item = doc.data();
-      const li = document.createElement("li");
-      li.setAttribute("data-id", doc.id);
-
-      const span = document.createElement("span");
-      span.textContent = isCandle ? `🕯️ ${item.text || item.name}` : `"${item.text}"`;
-      span.classList.add("quote-text");
-
-      const actionsDiv = document.createElement("div");
-      actionsDiv.classList.add("quote-actions");
-
-      const editBtn = document.createElement("button");
-      editBtn.textContent = "Edit";
-      editBtn.classList.add("edit-btn");
-      actionsDiv.appendChild(editBtn);
-
-      const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "Delete";
-      deleteBtn.classList.add("delete-btn");
-      actionsDiv.appendChild(deleteBtn);
-
-      li.appendChild(span);
-      li.appendChild(actionsDiv);
-      listElement.appendChild(li);
-    });
-  });
-}
-
-                  // At the end of the DOMContentLoaded block, before this: });
-      liveSync("reflections", "reflections-list");
-      liveSync("candles", "candle-wall", true);
-    });
-
-          });
-      }
-
-      setupListEventListeners('submitted-quotes', STORAGE_KEYS.quotes);
-      setupListEventListeners('reflections-list', STORAGE_KEYS.reflections);
-      setupListEventListeners('candle-wall', STORAGE_KEYS.candles);
-
-      // Initial render of lists from local storage
-     async function renderList(listId, storageKey) {
-  const items = await getFromStorage(storageKey);
-  const listElement = document.getElementById(listId);
-  listElement.innerHTML = "";
-
-  const isCandle = storageKey === STORAGE_KEYS.candles;
-
-  items.forEach(itemData => {
-    const li = document.createElement("li");
-    li.setAttribute("data-id", itemData.id);
-
-    const textSpan = document.createElement("span");
-    textSpan.textContent = isCandle ? `🕯️ ${itemData.text}` : `"${itemData.text}"`;
-    textSpan.classList.add("quote-text");
-    li.appendChild(textSpan);
-
-    const actionsDiv = document.createElement("div");
-    actionsDiv.classList.add("quote-actions");
-
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "Edit";
-    editBtn.classList.add("edit-btn");
-    actionsDiv.appendChild(editBtn);
-
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.classList.add("delete-btn");
-    actionsDiv.appendChild(deleteBtn);
-
-    li.appendChild(actionsDiv);
-    listElement.appendChild(li);
-  });
-}
-
-
-      const randomQuoteBox = document.getElementById("random-quote");
-      const journalPromptBox = document.getElementById("prompt-display");
-      const familyQuestionBox = document.getElementById("family-question-display");
-
-      if (randomQuoteBox) {
-        randomQuoteBox.addEventListener('dblclick', () => { randomQuoteBox.style.display = 'none'; });
-      }
-      if (journalPromptBox) {
-        journalPromptBox.addEventListener('dblclick', () => { journalPromptBox.style.display = 'none'; });
-      }
-      if (familyQuestionBox) {
-        familyQuestionBox.addEventListener('dblclick', () => { familyQuestionBox.style.display = 'none'; });
-      }
-      
-      const quoteOfDay = quotes[Math.floor(Math.random() * quotes.length)];
-      const dailyQuoteElement = document.getElementById("daily-quote");
-      if (dailyQuoteElement) {
-        dailyQuoteElement.textContent = quoteOfDay.text;
-      }
-    });
-    // --- Firebase Configuration ---
-const firebaseConfig = {
-  apiKey: "AIzaSyC0ka3EiqyN8J_wEXV8b1_1KAZ67CTmBdY",
-  authDomain: "shinewithinlive.firebaseapp.com",
-  projectId: "shinewithinlive",
-  storageBucket: "shinewithinlive.firebasestorage.app",
-  messagingSenderId: "626223295677",
-  appId: "1:626223295677:web:74c56d8938c6d2054e5bd4"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-function liveSync(collectionKey, listId, isCandle = false) {
-  const q = query(collection(db, collectionKey), orderBy("timestamp", "desc"));
-  onSnapshot(q, snapshot => {
-    const listElement = document.getElementById(listId);
-    listElement.innerHTML = "";
-
-    snapshot.forEach(doc => {
-      const item = doc.data();
-      const li = document.createElement("li");
-      li.setAttribute("data-id", doc.id);
-
-      const span = document.createElement("span");
-      span.textContent = isCandle ? `🕯️ ${item.text || item.name}` : `"${item.text}"`;
-      span.classList.add("quote-text");
-
-      const actionsDiv = document.createElement("div");
-      actionsDiv.classList.add("quote-actions");
-
-      const editBtn = document.createElement("button");
-      editBtn.textContent = "Edit";
-      editBtn.classList.add("edit-btn");
-      actionsDiv.appendChild(editBtn);
-
-      const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "Delete";
-      deleteBtn.classList.add("delete-btn");
-      actionsDiv.appendChild(deleteBtn);
-
-      li.appendChild(span);
-      li.appendChild(actionsDiv);
-      listElement.appendChild(li);
-    });
-  });
-}
-
-  </script>
+  <header>
+    <h1>Shine Within</h1>
+    <label class="theme-switch">
+      <input type="checkbox" id="theme-toggle" />
+      <span class="slider"></span>
+    </label>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#quotes">Quotes</a></li>
+        <li><a href="#journal">Journal</a></li>
+        <li><a href="#family-questions">Family</a></li>
+        <li><a href="#playlist">Playlist</a></li>
+        <li><a href="#reflection">Reflection</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#candle-section">Candle</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home">
+    <h2>Welcome to Your Dose of Light</h2>
+    <div id="daily-quote" class="quote-card">Quote of the Day loading...</div>
+    <p>Here you’ll find handpicked quotes and messages to uplift, inspire, and remind you of your strength.</p>
+    <button onclick="showRandomQuote()">Get a Random Quote</button>
+    <div id="random-quote" style="display: none;"></div>
+  </section>
+
+  <section id="quotes">
+    <h2>Positivity Quotes</h2>
+    <div class="filters">
+      <button class="filter-btn" data-category="all">All</button>
+      <button class="filter-btn" data-category="strength">Strength</button>
+      <button class="filter-btn" data-category="healing">Healing</button>
+      <button class="filter-btn" data-category="growth">Growth</button>
+      <button class="filter-btn" data-category="encouragement">Encouragement</button>
+    </div>
+    <ul id="quote-list"></ul>
+  </section>
+
+  <section id="journal">
+    <h2>Self-Care Journal Prompt</h2>
+    <p>Need a moment to reflect? Click the button below to receive a gentle prompt to guide your thoughts.</p>
+    <button onclick="showJournalPrompt()">Give Me a Prompt</button>
+    <div id="prompt-display" class="quote-card" style="margin-top: 1rem; display: none;"></div>
+  </section>
+
+  <section id="family-questions">
+    <h2>Heart Full Family Questions</h2>
+    <p>What stories and wisdom do you want to pass on? Get a question to help you share your heart with future generations.</p>
+    <button onclick="showFamilyQuestion()">Ask a Family Question</button>
+    <div id="family-question-display" class="quote-card" style="margin-top: 1rem; display: none;"></div>
+  </section>
+
+  <section id="playlist">
+    <h2>Positivity Playlist</h2>
+    <p>Here’s a collection of songs to lift your spirit, calm your heart, and help you feel connected.</p>
+    <ul class="community-list">
+      <li><strong>"Keep Your Head Up"</strong> – Andy Grammer</li>
+      <li><strong>"Scars to Your Beautiful"</strong> – Alessia Cara</li>
+      <li><strong>"Rescue"</strong> – Lauren Daigle</li>
+      <li><strong>"Rainbow"</strong> – Kacey Musgraves</li>
+      <li><strong>"Fight Song"</strong> – Rachel Platten</li>
+      <li><strong>"You Say"</strong> – Lauren Daigle</li>
+      <li><strong>"Rise Up"</strong> – Andra Day</li>
+      <li><strong>"Pocketful of Sunshine"</strong> – Natasha Bedingfield 🌻</li>
+      <li><strong>"Brave"</strong> – Sara Bareilles</li>
+      <li><strong>"Who You Are"</strong> – Jessie J</li>
+    </ul>
+  </section>
+
+  <section id="reflection">
+    <h2>What Brings You Hope?</h2>
+    <p>Leave a short, anonymous answer below and share a little light with others who visit.</p>
+    <div class="submission-box">
+      <input type="text" id="hope-input" placeholder="Your hopeful thought..." />
+      <button id="submit-reflection">Submit Reflection</button>
+    </div>
+    <ul id="reflections-list" class="community-list"></ul>
+  </section>
+
+  <section id="community">
+    <h2>Share Your Favorite Quote</h2>
+    <p>Have a favorite quote? Share it with the world:</p>
+    <div class="submission-box">
+      <input type="text" id="user-quote" placeholder="Enter your quote here" />
+      <button id="submit-quote">Submit Quote</button>
+    </div>
+    <h3>Community Quotes</h3>
+    <ul id="submitted-quotes" class="community-list"></ul>
+  </section>
+  
+  <section id="candle-section">
+    <h2>Light a Candle</h2>
+    <p>Honor someone you miss or carry in your heart by lighting a digital candle and sharing a message of remembrance or hope.</p>
+    <div class="submission-box">
+        <input type="text" id="candle-input" placeholder="Type their name or a message...">
+        <button id="light-candle-btn">Light Candle 🕯️</button>
+    </div>
+    <ul id="candle-wall" class="community-list"></ul>
+  </section>
+
+  <section id="about">
+    <h2>About This Site</h2>
+    <p>This space was created to spread light in dark times, to remind you that you matter, and to share healing words. Every quote here is chosen with heart.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>Have a quote you want featured or want to connect? Email: <a href="mailto:leann8285@gmail.com">leann8285@gmail.com</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 ShineWithinWisdomWaves. Created with heart by Alexis Kendle.</p>
+  </footer>
+
+    <div id="custom-modal" class="modal-overlay">
+      <div class="modal-content">
+          <h3 id="modal-title">Edit Entry</h3>
+          <p id="modal-text"></p>
+          <input type="text" id="modal-input" />
+          <div class="modal-actions">
+              <button id="modal-cancel">Cancel</button>
+              <button id="modal-confirm">Confirm</button>
+          </div>
+      </div>
+  </div>
+
+  <script type="module">
+    // --- Firebase Configuration and Imports ---
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js';
+    import { getFirestore, collection, query, orderBy, onSnapshot, addDoc, updateDoc, deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC0ka3EiqyN8J_wEXV8b1_1KAZ67CTmBdY",
+      authDomain: "shinewithinlive.firebaseapp.com",
+      projectId: "shinewithinlive",
+      storageBucket: "shinewithinlive.firebasestorage.app",
+      messagingSenderId: "626223295677",
+      appId: "1:626223295677:web:74c56d8938c6d2054e5bd4"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Data Arrays ---
+      const quotes = [
+        { text: "You are not behind — you are becoming.", category: "Growth" },
+        { text: "Just because it's hard doesn't mean you're weak. It means you're trying.", category: "Encouragement" },
+        { text: "Healing isn't pretty, but you're still doing it.", category: "Healing" },
+        { text: "You’ve already survived 100% of your worst days.", category: "Strength" },
+        { text: "The cracks are where the light gets in.", category: "Healing" },
+        { text: "You’re allowed to be both a masterpiece and a work in progress.", category: "Growth" },
+        { text: "You’re stronger than the storm you’re walking through.", category: "Strength" },
+        { text: "Small steps are still steps. Keep going.", category: "Encouragement" },
+        { text: "The human spirit is stronger than anything that can happen to it.", category: "Strength" },
+        { text: "A hero is an ordinary individual who finds the strength to persevere and endure in spite of overwhelming obstacles.", category: "Strength" },
+        { text: "Where there is no struggle, there is no strength.", category: "Strength" },
+        { text: "Strength does not come from winning. Your struggles develop your strengths.", category: "Strength" },
+        { text: "Fall down seven times, stand up eight.", category: "Strength" },
+        { text: "The oak fought the wind and was broken, the willow bent when it must and survived.", category: "Strength" },
+        { text: "You have power over your mind — not outside events. Realize this, and you will find strength.", category: "Strength" },
+        { text: "The wound is the place where the Light enters you.", category: "Healing" },
+        { text: "Give yourself the same care and attention that you give to others and watch yourself bloom.", category: "Healing" },
+        { text: "Healing comes in waves, and maybe today the wave hits the shore. And maybe tomorrow it will pull back. And that's okay.", category: "Healing" },
+        { text: "Your heart knows the way. Run in that direction.", category: "Healing" },
+        { text: "Be gentle with yourself, you're doing the best you can.", category: "Healing" },
+        { text: "Sometimes the healing is in the quiet, in the stillness, in the learning to be with yourself.", category: "Healing" },
+        { text: "It is not the load that breaks you down, it is the way you carry it.", category: "Healing" },
+        { text: "To heal a wound, you need to stop touching it.", category: "Healing" },
+        { text: "The only time you are actually growing is when you are uncomfortable.", category: "Growth" },
+        { text: "Do not be afraid to give up the good to go for the great.", category: "Growth" },
+        { text: "Every moment is a fresh beginning.", category: "Growth" },
+        { text: "The journey of a thousand miles begins with a single step.", category: "Growth" },
+        { text: "What you do makes a difference, and you have to decide what kind of difference you want to make.", category: "Growth" },
+        { text: "Become a student of change. It is the only thing that will remain constant.", category: "Growth" },
+        { text: "It's not about being the best. It's about being better than you were yesterday.", category: "Growth" },
+        { text: "Mistakes are proof that you are trying.", category: "Growth" },
+        { text: "Just for the record darling, not all positive change feels positive in the beginning.", category: "Encouragement" },
+        { text: "Even the darkest night will end and the sun will rise.", category: "Encouragement" },
+        { text: "This too shall pass. It might pass like a kidney stone, but it will pass.", category: "Encouragement" },
+        { text: "It's okay to not be okay. It's not okay to give up.", category: "Encouragement" },
+        { text: "You are doing better than you think you are.", category: "Encouragement" },
+        { text: "Breathe. You're going to be okay. You've gotten through all of your bad days so far.", category: "Encouragement" },
+        { text: "Look for something positive in each day, even if some days you have to look a little harder.", category: "Encouragement" }
+      ];
+      
+      const prompts = [ "What is something you need to let go of today?", "What would you say to your younger self?", "What does healing look like for you right now?", "Write down 3 things you’re proud of yourself for.", "What is something you’ve survived that you never thought you would?", "If you could speak to someone you miss, what would you tell them?", "What does being at peace mean to you?", "How have you grown in the past year — emotionally or spiritually?", "Who are you when no one else is around?", "What’s one kind thing you can do for yourself this week?", "What is a boundary you need to set for your own well-being?", "Describe a place where you feel completely at ease. What makes it so peaceful?", "What's a compliment you've received that you've never forgotten?", "Write a letter of forgiveness to yourself for a past mistake.", "What is your body asking for today? (e.g., rest, movement, nourishment)", "List five things you can see, four things you can feel, three things you can hear, two things you can smell, and one thing you can taste right now.", "What's a fear that is holding you back, and what's one small step you can take to face it?", "What does success look like to you, outside of career or money?", "Describe a time you felt truly understood by someone.", "What's a simple pleasure you can gift yourself today?", "How can you show more compassion to yourself when you're struggling?", "What is a quality you admire in others that you also possess?", "Write down a worry and then write down a more compassionate, reassuring thought to counter it.", "What are you grateful for in this exact moment?", "What is a creative activity that makes you lose track of time?", "What's a difficult emotion you're feeling right now? Allow yourself to sit with it without judgment.", "Who in your life makes you feel energized and supported?", "What is a promise you want to make to yourself for the upcoming week?", "Describe your perfect, restful day from morning to night.", "What is a limiting belief you're ready to challenge?", "What part of your life is currently bringing you the most joy?", "How do you recharge when you feel drained?", "What is something you've accomplished that you haven't given yourself enough credit for?", "Write about a time you felt connected to nature.", "What is a song that lifts your spirits, and why?", "What is a 'win' you've had this week, no matter how small?", "What are you looking forward to?", "If your body could talk, what would it thank you for?", "What is an area of your life where you'd like to ask for help?", "End this entry with a single word that describes how you want to feel tomorrow."];
+
+      const familyQuestions = [ "What is a piece of advice you received from an elder that you want to pass on?", "What family tradition do you cherish the most and why?", "What is a story about your parents or grandparents that your descendants should know?", "What do you want your children/grandchildren to know about what love means to you?", "What was the happiest moment of your life so far, and who was with you?", "Describe a challenge you overcame and what it taught you about resilience.", "What is the most important lesson you've learned about forgiveness?", "If you could give your younger family members one 'secret to life,' what would it be?", "What do you want your legacy to be within your family?", "What smell, sound, or taste immediately reminds you of home and family?", "What's a piece of music that defines a period of your life?", "Describe a time you felt truly proud of a family member.", "What is the best meal you ever had, and who did you share it with?", "What is something you learned from a mistake that you want your family to know?", "If you could travel back to one moment in your family's history, where would you go?", "What does 'home' mean to you, beyond just a physical place?", "Who was your childhood hero and why?", "What is a small, everyday moment that brings you immense joy?", "What is a skill you're proud of that you'd love to teach someone in your family?", "How did you meet your best friend?", "What is a book or movie that changed the way you see the world?", "Describe a time you had to be brave.", "What is your favorite memory of a holiday with your family?", "What do you admire most about your parents?", "What do you hope your grandchildren will say about you one day?", "What is a family story that always makes you laugh?", "What value do you believe is most important to instill in the next generation?", "Describe a place that feels sacred or special to you.", "What's a dream you still hope to achieve?", "What has been the most surprising thing about getting older?", "What's a family recipe you want to make sure gets passed down?", "Describe a time your family came together to support someone.", "What is your favorite photo of your family and what's the story behind it?", "What's a song that reminds you of your childhood?", "What's a piece of advice you'd give your 20-year-old self?", "What is a family inside joke that you can share?", "What's the most beautiful place you've ever visited with family?", "What's a lesson you learned from a pet?", "What's a story about a family heirloom?", "What's something you admire about your sibling(s)?", "What's a time you felt perfectly content?", "What's a family myth or legend?", "What's the best gift you've ever received and why was it so special?", "What's a challenge your family faced and how did you overcome it together?", "What's your earliest memory?", "What's something you want to be remembered for?", "What's a tradition you started or want to start in your own family?", "What's a moment of pure, unexpected kindness you witnessed or received?", "What's a piece of local history from where you grew up that your family should know?", "If you could have dinner with any three relatives (living or passed), who would they be and why?"];
+
+      // --- Firebase Collection Keys ---
+      const COLLECTION_KEYS = {
+        reflections: "reflections",
+        candles: "candles",
+        quotes: "community-quotes" // Changed to match a Firebase collection name
+      };
+
+      // ===== Modal Logic (Retained from original code, assuming it functions) =====
+      const modal = document.getElementById('custom-modal');
+      const modalTitle = document.getElementById('modal-title');
+      const modalText = document.getElementById('modal-text');
+      const modalInput = document.getElementById('modal-input');
+      const modalCancel = document.getElementById('modal-cancel');
+      const modalConfirm = document.getElementById('modal-confirm');
+      let modalResolve = null;
+
+      function showModal(config) {
+          modalTitle.textContent = config.title;
+          modalText.textContent = config.text || '';
+          modalInput.style.display = config.showInput ? 'block' : 'none';
+          modalInput.value = config.inputValue || '';
+          modalConfirm.textContent = config.confirmText || 'Confirm';
+          
+          modal.style.display = 'flex';
+
+          return new Promise((resolve) => {
+              modalResolve = resolve;
+          });
+      }
+
+      modalCancel.addEventListener('click', () => {
+          modal.style.display = 'none';
+          if (modalResolve) modalResolve(null);
+      });
+
+      modalConfirm.addEventListener('click', () => {
+          modal.style.display = 'none';
+          if (modalResolve) modalResolve(modalInput.style.display === 'none' ? true : modalInput.value);
+      });
+
+      // ===== GLOBAL FUNCTIONS (Quote, Journal, Family Prompts) =====
+      window.showJournalPrompt = function() {
+          const box = document.getElementById('prompt-display');
+          const randomIndex = Math.floor(Math.random() * prompts.length);
+          box.textContent = prompts[randomIndex];
+          box.style.display = 'block';
+          box.classList.remove("fade-in");
+          void box.offsetWidth;
+          box.classList.add("fade-in");
+      }
+
+      window.showFamilyQuestion = function() {
+          const box = document.getElementById('family-question-display');
+          const randomIndex = Math.floor(Math.random() * familyQuestions.length);
+          box.textContent = familyQuestions[randomIndex];
+          box.style.display = 'block';
+          box.classList.remove("fade-in");
+          void box.offsetWidth;
+          box.classList.add("fade-in");
+      }
+      
+      window.showRandomQuote = function() {
+          const box = document.getElementById("random-quote");
+          const randomIndex = Math.floor(Math.random() * quotes.length);
+          box.textContent = quotes[randomIndex].text;
+          box.style.display = 'block';
+          box.style.marginTop = '1.5rem';
+          box.classList.remove("fade-in");
+          void box.offsetWidth;
+          box.classList.add("fade-in");
+          box.classList.add("quote-card");
+      }
+
+      // ===== Firebase Operations =====
+
+      // Function to add items to Firebase Firestore
+      async function addItem(collectionKey, inputElementId) {
+          const input = document.getElementById(inputElementId);
+          const text = input.value.trim();
+          
+          if (text) {
+              try {
+                  const newItem = {
+                      text: text,
+                      timestamp: Date.now()
+                  };
+                  
+                  await addDoc(collection(db, collectionKey), newItem);
+                  input.value = ""; // Clear input on success
+              } catch (error) {
+                  console.error("Error adding document: ", error);
+                  alert("Error submitting. Check console for details.");
+              }
+          }
+      }
+
+      // Function to edit an item in Firebase Firestore
+      async function editItem(collectionKey, docId, currentText, isCandle) {
+          const newText = await showModal({
+              title: 'Edit Entry',
+              text: isCandle ? 'Edit the candle message:' : 'Edit the entry:',
+              showInput: true,
+              inputValue: currentText,
+              confirmText: 'Save'
+          });
+
+          if (newText !== null && newText.trim() !== "" && newText !== currentText) {
+              try {
+                  await updateDoc(doc(db, collectionKey, docId), {
+                      text: newText.trim(),
+                  });
+              } catch (error) {
+                  console.error("Error updating document: ", error);
+              }
+          }
+      }
+
+      // Function to delete an item from Firebase Firestore
+      async function deleteItem(collectionKey, docId) {
+          const confirmed = await showModal({
+              title: 'Delete Entry',
+              text: 'Are you sure you want to delete this entry?',
+              showInput: false,
+              confirmText: 'Delete'
+          });
+
+          if (confirmed) {
+              try {
+                  await deleteDoc(doc(db, collectionKey, docId));
+              } catch (error) {
+                  console.error("Error deleting document: ", error);
+              }
+          }
+      }
+
+      // Function to sync Firebase data to the UI in real-time
+      function liveSync(collectionKey, listId, isCandle = false) {
+          const q = query(collection(db, collectionKey), orderBy("timestamp", "desc"));
+          
+          onSnapshot(q, snapshot => {
+              const listElement = document.getElementById(listId);
+              listElement.innerHTML = ""; // Clear the list
+
+              snapshot.forEach(doc => {
+                  const item = doc.data();
+                  const li = document.createElement("li");
+                  li.setAttribute("data-id", doc.id);
+                  li.setAttribute("data-collection", collectionKey);
+
+                  const span = document.createElement("span");
+                  span.textContent = isCandle ? `🕯️ ${item.text}` : `"${item.text}"`;
+                  span.classList.add("quote-text");
+
+                  const actionsDiv = document.createElement("div");
+                  actionsDiv.classList.add("quote-actions");
+
+                  const editBtn = document.createElement("button");
+                  editBtn.textContent = "Edit";
+                  editBtn.classList.add("edit-btn");
+                  actionsDiv.appendChild(editBtn);
+
+                  const deleteBtn = document.createElement("button");
+                  deleteBtn.textContent = "Delete";
+                  deleteBtn.classList.add("delete-btn");
+                  actionsDiv.appendChild(deleteBtn);
+
+                  li.appendChild(span);
+                  li.appendChild(actionsDiv);
+                  listElement.appendChild(li);
+              });
+          });
+      }
+
+      // ===== Static Quotes & Filters =====
+      const showQuotes = (category = "all") => {
+          const list = document.getElementById("quote-list");
+          list.innerHTML = "";
+          const filtered = category === "all"
+            ? quotes
+            : quotes.filter(q => q.category.toLowerCase() === category.toLowerCase());
+          filtered.forEach(q => {
+            const li = document.createElement("li");
+            li.classList.add("quote-card");
+            li.textContent = q.text;
+            list.appendChild(li);
+          });
+      }
+
+      // ===== Event Listeners =====
+
+      // Theme Toggle
+      const themeToggle = document.getElementById("theme-toggle");
+      themeToggle.addEventListener("change", () => {
+        document.body.classList.toggle("dark-mode");
+      });
+
+      // Quote Filters
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      filterButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          const list = document.getElementById("quote-list");
+          if (button.classList.contains('active')) {
+              list.innerHTML = "";
+              button.classList.remove('active');
+          } else {
+              const category = button.getAttribute("data-category");
+              showQuotes(category);
+              filterButtons.forEach(btn => btn.classList.remove("active"));
+              button.classList.add("active");
+          }
+        });
+      });
+
+      // Submit Buttons for Community Sections
+      document.getElementById("submit-quote").addEventListener("click", () => addItem(COLLECTION_KEYS.quotes, 'user-quote'));
+      document.getElementById("submit-reflection").addEventListener("click", () => addItem(COLLECTION_KEYS.reflections, 'hope-input'));
+      document.getElementById("light-candle-btn").addEventListener("click", () => addItem(COLLECTION_KEYS.candles, 'candle-input'));
+
+      // Event delegation for Edit and Delete buttons on dynamically created lists
+      document.querySelectorAll('.community-list').forEach(list => {
+        list.addEventListener('click', (e) => {
+          const target = e.target;
+          const li = target.closest('li');
+          
+          if (!li) return;
+          
+          const id = li.getAttribute('data-id');
+          const collectionKey = li.getAttribute('data-collection');
+          const isCandle = collectionKey === COLLECTION_KEYS.candles;
+          
+          // Extract text content for editing
+          let currentText = li.querySelector('.quote-text').textContent.trim();
+          if (isCandle) {
+            currentText = currentText.replace('🕯️ ', '');
+          } else {
+            // Remove surrounding quotes for non-candle entries if present
+            if (currentText.startsWith('"') && currentText.endsWith('"')) {
+              currentText = currentText.slice(1, -1);
+            }
+          }
+
+          if (target.classList.contains('edit-btn')) {
+            editItem(collectionKey, id, currentText, isCandle);
+          } else if (target.classList.contains('delete-btn')) {
+            deleteItem(collectionKey, id);
+          }
+        });
+      });
+
+      // Initialize live sync for community lists
+      liveSync(COLLECTION_KEYS.quotes, 'submitted-quotes', false);
+      liveSync(COLLECTION_KEYS.reflections, 'reflections-list', false);
+      liveSync(COLLECTION_KEYS.candles, 'candle-wall', true);
+
+      // Double-click event to hide prompt boxes
+      const randomQuoteBox = document.getElementById("random-quote");
+      const journalPromptBox = document.getElementById("prompt-display");
+      const familyQuestionBox = document.getElementById("family-question-display");
+
+      if (randomQuoteBox) {
+        randomQuoteBox.addEventListener('dblclick', () => { randomQuoteBox.style.display = 'none'; });
+      }
+      if (journalPromptBox) {
+        journalPromptBox.addEventListener('dblclick', () => { journalPromptBox.style.display = 'none'; });
+      }
+      if (familyQuestionBox) {
+        familyQuestionBox.addEventListener('dblclick', () => { familyQuestionBox.style.display = 'none'; });
+      }
+      
+      // Initial daily quote display
+      const quoteOfDay = quotes[Math.floor(Math.random() * quotes.length)];
+      const dailyQuoteElement = document.getElementById("daily-quote");
+      if (dailyQuoteElement) {
+        dailyQuoteElement.textContent = quoteOfDay.text;
+      }
+    });
+  </script>
 </body>
 </html>
